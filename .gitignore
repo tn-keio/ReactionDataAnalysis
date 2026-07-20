@@ -1,0 +1,38 @@
+# --- Generated output ---
+Results/
+Report/
+Logs/
+*.log
+*.png
+*.jpg
+*.jpeg
+*.keras
+*.h5
+*.npy
+
+# Exception: keep the paper figures under Figures/ (regeneratable via Scripts/, but shipped for convenience)
+!Figures/
+!Figures/*.png
+
+# --- Large / non-shared data ---
+# The Data/ CSV sample IS tracked (it is the shared dataset). Ignore bulk/binary data only.
+*.parquet
+Data/BigData/
+Data/**/processed/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+
+# --- IDE / OS ---
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

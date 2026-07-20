@@ -1,0 +1,14 @@
+# Core analysis, statistics, figures, and the demo (Python 3.12+; tested on 3.14.2)
+numpy==2.4.1
+pandas==3.0.0
+pyarrow==24.0.0
+scipy==1.17.0
+scikit-learn==1.8.0
+scikit-posthocs==0.14.0
+statsmodels==0.14.6
+matplotlib==3.10.8
+Pillow==12.1.0
+
+# Deep-learning baselines only (1D-AE, 1D-CNN, 2D-CNN/ResNet). Optional.
+# These were run under a separate Python 3.12.7 environment.
+# tensorflow==2.20.0
