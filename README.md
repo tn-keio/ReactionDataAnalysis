@@ -1,8 +1,8 @@
-# Reaction-Curve Anomaly Detection — Dataset & Code (CCA resubmission)
+# Reaction-Curve Anomaly Detection — Dataset & Code
 
 Photometric **reaction-process (reaction-curve) time-series** data from clinical-chemistry
-analyzers, and the accompanying anomaly-detection code, for the *Clinica Chimica Acta* (CCA)
-resubmission of our study on detecting abnormal reactions from reaction-process data.
+analyzers, and the accompanying anomaly-detection code, for our study on detecting abnormal
+reactions from reaction-process data.
 
 This repository ships a **de-identified, size-limited sample** of the dataset (see
 [Data availability](#data-availability)). The full corpus (≈22.8 million curves) is too large to host
@@ -11,7 +11,7 @@ on GitHub.
 ## Repository layout
 
 ```
-Export_For_GitHub_CCA/
+ReactionDataAnalysis/
 ├── Data/                       # Shared CSV sample (tracked)
 │   ├── <ITEM>.csv              # one file per analyte (endpoint assays)
 │   ├── items_info.csv          # data dictionary: wavelengths, assay type

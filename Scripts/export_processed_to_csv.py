@@ -1,4 +1,4 @@
-"""Export a GitHub-shareable CSV sample of the reaction-curve dataset (CCA resubmission).
+"""Export a GitHub-shareable CSV sample of the reaction-curve dataset.
 
 Reads the internal processed Parquet store (Hive-partitioned by A_Name; columns
 SystemName, S_ID, S_Date, Value, RAS1..RAS38, RAM1..RAM38 -- ALL 38 photometric points) and
@@ -26,7 +26,7 @@ import pyarrow.dataset as ds
 
 # ---- config ----
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.abspath(os.path.join(HERE, '..'))                 # Export_For_GitHub_CCA/
+REPO = os.path.abspath(os.path.join(HERE, '..'))                 # repository root
 MAIN = os.path.abspath(os.path.join(REPO, '..'))                 # main project root
 PROC = os.path.join(MAIN, 'Data', 'BigData', 'processed')
 PARAM = os.path.join(MAIN, 'Data', 'parameter_mapped.csv')

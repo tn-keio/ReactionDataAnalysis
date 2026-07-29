@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Graphical Abstract for the CCA manuscript.
+Graphical Abstract for the manuscript.
 Self-contained (no data dependency): schematic curves + confirmed summary numbers.
 Landscape ~2.5:1 (Elsevier GA spec). Simplified text, large fonts for legibility.
 Output: graphical_abstract.png / .pdf

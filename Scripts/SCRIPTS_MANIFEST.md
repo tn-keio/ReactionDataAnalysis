@@ -5,7 +5,7 @@ supports. Analysis code lives in `analysis_full/`, figure generators in `figures
 the deep-learning baselines in `../Code/src/`, and a runnable sample-data demo is
 `demo_mahalanobis.py`.
 
-The submitted analysis covers **21 endpoint assays** and **11 anomaly detectors**;
+The analysis covers **21 endpoint assays** and **11 anomaly detectors**;
 the proposed method is the **empirical-covariance Mahalanobis distance**.
 
 ## Paths and data
@@ -130,7 +130,7 @@ reference sets. The correction was applied identically to all eleven detectors.
 | `figures/make_reaction_point_window_figure.py` | Reaction-point window on representative curves; companion panel to the variability figure → **Fig. S4**. |
 | `figures/make_graphical_abstract.py` | Graphical abstract. |
 | `figures/convert_tif_to_png.py` | Format conversion helper for submitted artwork (utility). |
-| `figures/flatten_rgba.py` | Flattens transparency before submission (utility). |
+| `figures/flatten_rgba.py` | Flattens transparency for journal artwork requirements (utility). |
 | `figures/sync_from_analysis.py` | Copies regenerated figures from the analysis tree into the manuscript repository (utility). |
 
 Figure generators consume the outputs of the analysis scripts (Parquet / `Results/`
@@ -140,7 +140,7 @@ Figure generators consume the outputs of the analysis scripts (Parquet / `Result
 
 ## Changelog
 
-**2026-07-29** — Aligned with the final submitted manuscript.
+**2026-07-29** — Aligned with the final manuscript.
 
 - Corrected the method-comparison panel size from 14 items to **21**.
 - Re-mapped every entry onto the current supplement numbering (S1–S14 as deposited

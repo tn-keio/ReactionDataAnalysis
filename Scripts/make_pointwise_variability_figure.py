@@ -34,7 +34,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.abspath(os.path.join(HERE, '..'))                 # Export_For_GitHub_CCA/
+REPO = os.path.abspath(os.path.join(HERE, '..'))                 # repository root
 RES = os.path.join(REPO, 'Data', 'reaction_point_window')       # bundled frozen input CSVs
 FIG = os.path.join(REPO, 'Figures')
 
