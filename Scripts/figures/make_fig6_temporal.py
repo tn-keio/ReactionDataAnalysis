@@ -15,7 +15,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 REPO = os.environ.get('ABDETECT_BASE') or os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 
-BASE = os.path.join(REPO, "\Results\20260706_TemporalRobustness_AllItems")
+BASE = os.path.join(REPO, 'Results', '20260706_TemporalRobustness_AllItems')
 OUT = os.path.dirname(__file__)
 PANEL = ["TP", "ALB", "TB", "DB", "CA", "IP", "CRE", "UA", "FE", "CU", "ZN", "GLU", "GA", "CRP"]
 

@@ -18,7 +18,8 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 REPO = os.environ.get('ABDETECT_BASE') or os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 
-PARQUET = os.path.join(REPO, "\Data\BigData\synthetic_anomalies\endpoint_synthetic_anomalies_p5_38.parquet")
+PARQUET = os.path.join(REPO, 'Data', 'BigData', 'synthetic_anomalies',
+                       'endpoint_synthetic_anomalies_p5_38.parquet')
 OUT = os.path.dirname(__file__)
 ITEM = "CRE"
 SEV = 5.0

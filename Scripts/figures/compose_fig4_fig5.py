@@ -11,7 +11,7 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 REPO = os.environ.get('ABDETECT_BASE') or os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 
-SRC = os.path.join(REPO, "\ForPaper")
+SRC = os.path.join(REPO, 'ForPaper')
 OUT = os.path.dirname(__file__)
 
 MC = os.path.join(SRC, "04_MethodComparison", "Figures_p5_38", "Figures")
