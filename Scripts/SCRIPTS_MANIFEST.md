@@ -62,9 +62,9 @@ used only by `measure_review_burden_unified.py`; it otherwise falls back to
 | :-- | :-- |
 | `analysis_full/run_paper_method_comparison.py` | Core benchmark engine (the 11 original detectors plus the compact autoencoders); applies the common clean-holdout false-positive budget. Imports the deep-learning baselines from `../Code/src/` (needs TensorFlow). Methods §2.7–§2.8; Suppl. S5. |
 | `analysis_full/select_compact_ae.py` | Chooses the bottleneck size z of the dense compact autoencoder from the clean validation MSE alone (elbow rule) and writes its metrics as `dae_elbow`. Table 1; Suppl. S5. |
-| `analysis_full/run_method_comparison_p5_38.py` | Final configuration wrapper: fixed 5–38 reaction-point window, 21-item panel. **Table 1**; Fig. 2–4; Suppl. S5. |
-| `analysis_full/method_comparison_posthoc.py` | Friedman omnibus + Nemenyi all-pairs post-hoc on mean ranks; base-curve-clustered bootstrap (Methods §2.11; Results §3.6; Suppl. S6.3, S6.7). |
-| `analysis_full/method_comparison_stat_tests.py` | Assay-paired Wilcoxon signed-rank (one-sided, Holm–Bonferroni) + McNemar at the sample level (Methods §2.11; Results §3.6; Suppl. S6). |
+| `analysis_full/run_method_comparison_p5_38.py` | Final configuration wrapper: fixed 5–38 reaction-point window, 21-item panel (Ca, ALB and IP are taken from the clean re-runs below). **Table 1**; Fig. 2–4; Suppl. S5. |
+| `analysis_full/method_comparison_posthoc.py` | Friedman omnibus, mean ranks and Nemenyi all-pairs post-hoc over the 21 assays × 13 detectors; item-block bootstrap of the mean and worst-item recall (Methods §2.11; Results §3.6; Suppl. S6.2, S6.3, S6.8; Tables S6-1, S6-3). |
+| `analysis_full/method_comparison_stat_tests.py` | Assay-paired Wilcoxon signed-rank (one-sided, Holm–Bonferroni); sample-level McNemar discordance with a base-curve cluster bootstrap (Methods §2.11; Results §3.6; Suppl. S6.4, S6.5, S6.7; Table S6-2). |
 
 ### Deep-learning baselines — `../Code/src/`
 
@@ -150,6 +150,15 @@ Figure generators consume the outputs of the analysis scripts (Parquet / `Result
 ---
 
 ## Changelog
+
+**2026-10-17** — Statistics over the 13 detectors.
+
+- `method_comparison_posthoc.py` and `method_comparison_stat_tests.py` now cover
+  the 21-item panel and the 13 detectors (the 11 original ones plus the two compact
+  autoencoders), and add the item-block bootstrap (Table S6-3) and the base-curve
+  cluster bootstrap of the McNemar discordance (Table S6-2).
+- `run_method_comparison_p5_38.py` runs the 21-item panel (previously a 14-item list;
+  GA is still computed for `figures/make_figures.py`).
 
 **2026-10-16** — Normalization without clipping; compact autoencoders.
 

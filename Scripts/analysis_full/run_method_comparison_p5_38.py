@@ -1,10 +1,11 @@
-# FINAL method comparison at the CONFIRMED reaction-point window 5-38 (14-item panel).
+# FINAL method comparison at the CONFIRMED reaction-point window 5-38 (21-item panel).
 #
 # Thin config-override wrapper around run_paper_method_comparison.py so the heavy, reviewed scoring
 # pipeline is reused verbatim (no 400-line copy).  It only changes:
 #   * window            : points 5-38 (RAM5..RAM38 / RAS5..RAS38, XPTS)  [was 11-38]
 #   * synthetic battery : endpoint_synthetic_anomalies_p5_38.parquet     [regenerated at 5-38]
-#   * item panel        : 14 items (the 12-item panel + GA + CRP; PaperOverview 2.4a -> LOF collapses)
+#   * item panel        : the 21-item panel (Ca, ALB and IP are taken from the clean re-runs,
+#                          rerun_ca_clean.py / rerun_m2_clean.py), plus GA for make_figures.py
 #   * output folder     : Results/20260717_MethodComparison_p5_38        [11-38 results preserved]
 #   * SELF_CAL_BUDGET   : 99.5  -> ALSO emit a self-calibrated (deployment) operating point, in
 #                          ADDITION to the FAIR holdout-clean + FP-matched calibration (the primary
@@ -35,8 +36,10 @@ M.RAS = [f'RAS{i}' for i in range(P0, 39)]
 M.XPTS = np.arange(P0, 39)
 
 M.ITEMS = [('TP', 'TP'), ('ALB', 'ALB'), ('TB', 'TB'), ('DB', 'DB'), ('Ca', 'CA'), ('IP', 'IP'),
-           ('CRE', 'CRE'), ('UA', 'UA'), ('Fe', 'FE'), ('Cu', 'CU'), ('Zn', 'ZN'), ('GLU', 'GLU'),
-           ('GA', 'GA'), ('CRP', 'CRP')]                     # 14-item panel
+           ('CRE', 'CRE'), ('UA', 'UA'), ('CRP', 'CRP'), ('Fe', 'FE'), ('Cu', 'CU'), ('Zn', 'ZN'),
+           ('GLU', 'GLU'), ('TG', 'TG'), ('LDL-C', 'LDL-C'), ('HDL-C', 'HDL-C'), ('TC', 'TC'),
+           ('IgG', 'IGG'), ('KL-6', 'KL-6'), ('IgA', 'IGA'), ('IgM', 'IGM'),   # 21-item panel
+           ('GA', 'GA')]          # not in the 21-item panel; kept for figures/make_figures.py
 
 M.SYN = os.path.join(M.BASE_DIR, 'Data', 'BigData', 'synthetic_anomalies',
                      'endpoint_synthetic_anomalies_p5_38.parquet')
