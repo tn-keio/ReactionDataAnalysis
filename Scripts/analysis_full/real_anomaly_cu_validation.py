@@ -27,7 +27,7 @@ BUDGET = 99.5
 
 def maha_fit(train):
     lo, hi = train.min(0), train.max(0)
-    nz = lambda X: np.clip((X - lo) / (hi - lo + 1e-8), 0.0, 1.0)
+    nz = lambda X: (X - lo) / (hi - lo + 1e-8)      # affine, no clipping
     ntr = nz(train); mu = ntr.mean(0); P = np.linalg.pinv(np.cov(ntr.T))
     dtr = np.einsum('ij,jk,ik->i', ntr - mu, P, ntr - mu)
     thr = np.percentile(dtr, BUDGET)

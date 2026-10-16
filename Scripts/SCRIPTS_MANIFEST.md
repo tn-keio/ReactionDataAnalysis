@@ -5,8 +5,14 @@ supports. Analysis code lives in `analysis_full/`, figure generators in `figures
 the deep-learning baselines in `../Code/src/`, and a runnable sample-data demo is
 `demo_mahalanobis.py`.
 
-The analysis covers **21 endpoint assays** and **11 anomaly detectors**;
+The analysis covers **21 endpoint assays** and **13 anomaly detectors**;
 the proposed method is the **empirical-covariance Mahalanobis distance**.
+
+**Normalization.** The calc channel is min–max scaled without clipping (a purely affine map).
+The method comparison uses one scalar pair for all reaction points, taken from the
+10,000-curve training pool; the deployment-style analyses (Cu case, maintenance and lot
+events, transferability, estimator selection) use one pair per reaction point taken from
+each training window, and the workload analysis uses a scalar pair from each window.
 
 ## Paths and data
 
@@ -54,7 +60,8 @@ used only by `measure_review_burden_unified.py`; it otherwise falls back to
 
 | Script | Manuscript |
 | :-- | :-- |
-| `analysis_full/run_paper_method_comparison.py` | Core 11-detector benchmark engine; applies the common clean-holdout false-positive budget. Imports the deep-learning baselines from `../Code/src/` (needs TensorFlow). Methods §2.7–§2.8; Suppl. S5. |
+| `analysis_full/run_paper_method_comparison.py` | Core benchmark engine (the 11 original detectors plus the compact autoencoders); applies the common clean-holdout false-positive budget. Imports the deep-learning baselines from `../Code/src/` (needs TensorFlow). Methods §2.7–§2.8; Suppl. S5. |
+| `analysis_full/select_compact_ae.py` | Chooses the bottleneck size z of the dense compact autoencoder from the clean validation MSE alone (elbow rule) and writes its metrics as `dae_elbow`. Table 1; Suppl. S5. |
 | `analysis_full/run_method_comparison_p5_38.py` | Final configuration wrapper: fixed 5–38 reaction-point window, 21-item panel. **Table 1**; Fig. 2–4; Suppl. S5. |
 | `analysis_full/method_comparison_posthoc.py` | Friedman omnibus + Nemenyi all-pairs post-hoc on mean ranks; base-curve-clustered bootstrap (Methods §2.11; Results §3.6; Suppl. S6.3, S6.7). |
 | `analysis_full/method_comparison_stat_tests.py` | Assay-paired Wilcoxon signed-rank (one-sided, Holm–Bonferroni) + McNemar at the sample level (Methods §2.11; Results §3.6; Suppl. S6). |
@@ -69,14 +76,18 @@ Python 3.12.7 environment.
 
 | Module | Manuscript |
 | :-- | :-- |
-| `../Code/src/model_autoencoder.py` | 1D convolutional autoencoder baseline, reconstruction error (Methods §2.7; Suppl. S5.2). |
-| `../Code/src/model_1d_cnn.py` | 1D-CNN feature extractor feeding Isolation Forest (Methods §2.7; Suppl. S5.2). |
+| `../Code/src/model_autoencoder.py` | 1D convolutional autoencoder baseline, reconstruction error; linear output layer (Methods §2.7; Suppl. S5.2). |
+| `../Code/src/model_1d_cnn.py` | 1D-CNN feature extractor feeding Isolation Forest; linear decoder output (Methods §2.7; Suppl. S5.2). |
+| `../Code/src/model_compact_autoencoder.py` | Compact-bottleneck autoencoders: dense 34-16-z-16-34 (`dae<z>`) and the 1D-AE topology with a Dense(z) code (`cae<z>`) (Methods §2.7; Suppl. S5). |
+
+The 2D-CNN pipeline renders each normalized curve on the y-range [−0.05, 1.05]
+(`RENDER_YLIM`); points outside this range are not drawn.
 
 ## Clean re-analysis of module-2 items (Results §3.2, §3.8; Suppl. S10b)
 
 Three module-2 assays (Ca, ALB, IP) had their synthetic batteries regenerated on a
 contemporaneous clean window after a transient optical event contaminated their
-reference sets. The correction was applied identically to all eleven detectors.
+reference sets. The correction was applied identically to all detectors.
 
 | Script | Manuscript |
 | :-- | :-- |
@@ -139,6 +150,21 @@ Figure generators consume the outputs of the analysis scripts (Parquet / `Result
 ---
 
 ## Changelog
+
+**2026-10-16** — Normalization without clipping; compact autoencoders.
+
+- Removed the clipping to [0, 1] from every min–max normalization
+  (`run_paper_method_comparison.py`, `run_estimator_selection.py`,
+  `event_robustness_analysis.py`, `inter_analyzer_analysis.py`,
+  `real_anomaly_cu_validation.py`, `measure_review_burden_unified.py`,
+  `run_temporal_robustness_all.py`, `run_temporal_robustness_demo.py`).
+- Corrected the description of the benchmark normalization: it is one scalar pair
+  for all reaction points, not a per-wavelength pair.
+- Deep-learning baselines: linear output layers in `model_autoencoder.py` and
+  `model_1d_cnn.py`; 2D-CNN rendering range widened from [0, 1] to [−0.05, 1.05].
+- Added the compact autoencoders (`Code/src/model_compact_autoencoder.py`) and the
+  bottleneck selection (`analysis_full/select_compact_ae.py`).
+- The benchmark now also reports Type D recall by lag (`recall_D_lag<k>`).
 
 **2026-07-29** — Aligned with the final manuscript.
 

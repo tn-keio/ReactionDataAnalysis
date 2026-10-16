@@ -91,7 +91,8 @@ class CNN1DFeatureExtractor:
         x = BatchNormalization(name='dec_bn3')(x)
         x = Activation('relu')(x)
 
-        decoded = Conv1D(1, 3, padding='same', activation='sigmoid', name='output')(x)
+        # linear output: inputs are not clipped, so targets can lie outside [0, 1]
+        decoded = Conv1D(1, 3, padding='same', activation=None, name='output')(x)
 
         # Crop if upsampling produced extra length
         final_len = decoded.shape[1]

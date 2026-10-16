@@ -3,8 +3,10 @@
 #
 # Per item: date-sorted Calc(=RAM-RAS). Splits (disjoint, fixed across N):
 #   train_pool=[:10000], holdout(clean calib)=[10000:12000], analysis(real)=[12000:15000].
-# Training sizes N in {500,5000,10000} (nested).  Normalization: per-wavelength min-max,
-#   constants from the 10,000-sample training pool, FIXED across N (implementation_notes §2).
+# Training sizes N in {500,5000,10000} (nested).  Normalization: one scalar min-max pair shared by
+#   all reaction points, constants from the 10,000-sample training pool, FIXED across N
+#   (implementation_notes §2).  No clipping: the map is purely affine, so values outside the
+#   training range are kept as they are.
 # Threshold: holdout-clean P{99.5,99,95} for ALL methods (fair).  Stochastic methods: seeds 0-3;
 #   deterministic (maha, maha_robust, pca, lof): seed 0 only.
 # Outputs:
@@ -29,6 +31,7 @@ if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 from Code.src.model_autoencoder import AutoencoderModel
 from Code.src.model_1d_cnn import CNN1DFeatureExtractor
+from Code.src.model_compact_autoencoder import DenseAE, ConvCompactAE
 
 # ---------------- config ----------------
 # (proc A_Name, synth item).  Full 12-item robustness panel (2026-07-06 expansion).
@@ -54,12 +57,17 @@ SELF_CAL_BUDGET = None                        # if set (e.g. 99.5): ALSO report 
                                              # via in-sample optimism; it is the DEPLOYMENT point, kept as
                                              # a supplement — the FAIR method comparison uses holdout/FP-match.
 
+# Compact-bottleneck autoencoders: 'dae<z>' = dense 34-16-z-16-34, 'cae<z>' = the 1D-AE topology with a
+# Dense(z) code.  The reported dense AE ('dae_elbow') picks z per item and N from the clean validation
+# MSE of dae1..dae16 (select_compact_ae.py); cae8 uses a fixed z = 8.
+COMPACT_AE = ['dae1', 'dae2', 'dae4', 'dae8', 'dae16', 'cae8']
 METHODS_OUT = ['maha', 'maha_robust', 'pca', 'ae', 'cnn1d', 'ae2d_and', 'ae2d_ens',
-               'twod_only', 'lof', 'iforest', 'ocsvm']
+               'twod_only', 'lof', 'iforest', 'ocsvm'] + COMPACT_AE
 COMPUTE_METHODS = ['maha', 'maha_robust', 'pca', 'ae', 'cnn1d', 'ae2d', 'twod_only',
-                   'lof', 'iforest', 'ocsvm']    # 'ae2d' emits ae2d_and + ae2d_ens
-STOCHASTIC = {'ae', 'cnn1d', 'ae2d', 'twod_only', 'iforest', 'ocsvm'}
+                   'lof', 'iforest', 'ocsvm'] + COMPACT_AE    # 'ae2d' emits ae2d_and + ae2d_ens
+STOCHASTIC = {'ae', 'cnn1d', 'ae2d', 'twod_only', 'iforest', 'ocsvm'} | set(COMPACT_AE)
 USES_2D = {'ae2d', 'twod_only'}
+RENDER_YLIM = (-0.05, 1.05)                  # 2D-CNN rendering range: normalized range + 5% margin
 
 RAM = [f'RAM{i}' for i in range(11, 39)]
 RAS = [f'RAS{i}' for i in range(11, 39)]
@@ -69,6 +77,7 @@ SYN = os.path.join(BASE_DIR, 'Data', 'BigData', 'synthetic_anomalies', 'endpoint
 OUT = os.path.join(BASE_DIR, 'Results', '20260705_MethodComparison_Paper')   # new folder (preserve old)
 REPORTS, CACHE = os.path.join(OUT, 'Reports'), os.path.join(OUT, 'Cache')
 JSONL = os.path.join(REPORTS, 'comparison.jsonl')
+COMPACT_LOG = 'compact_ae_selection.jsonl'   # per-fit validation MSE of the compact AEs, under REPORTS
 
 
 def set_seeds(s):
@@ -81,7 +90,7 @@ def norm_fit(a):
 
 
 def apply_norm(a, lo, hi):
-    return np.clip((a - lo) / (hi - lo + 1e-8), 0.0, 1.0)
+    return (a - lo) / (hi - lo + 1e-8)      # affine, no clipping
 
 
 def mcd_like(D, keep=0.95, iters=5):
@@ -138,7 +147,7 @@ def render_feats(X, tag=''):
     from tensorflow.keras.applications.resnet50 import preprocess_input
     n, L = X.shape; feats, buf = [], []
     fig = plt.figure(figsize=(IMG_PX / 100., IMG_PX / 100.), dpi=100)
-    ax = fig.add_axes([0, 0, 1, 1]); ax.axis('off'); ax.set_ylim(0, 1); ax.set_xlim(0, L - 1)
+    ax = fig.add_axes([0, 0, 1, 1]); ax.axis('off'); ax.set_ylim(*RENDER_YLIM); ax.set_xlim(0, L - 1)
     line, = ax.plot(np.zeros(L), color='black', lw=1.5); cv = fig.canvas
     for i in range(n):
         line.set_ydata(X[i]); cv.draw()
@@ -174,6 +183,9 @@ def metrics_at(flag_syn, meta, s_ho, thr):
         m[f'recall_{t}'] = float(flag_syn[sel & (sev >= 2)].mean())
         for k in sorted(np.unique(sev[sel])):
             m[f'recall_{t}_k{int(k)}'] = float(flag_syn[sel & (sev == k)].mean())
+    sel = at == 'D_kinetic'                     # Type D, recall by lag (points)
+    for k in sorted(np.unique(sev[sel])):
+        m[f'recall_D_lag{k:g}'] = float(flag_syn[sel & (sev == k)].mean())
     return m
 
 
@@ -228,6 +240,15 @@ def score_sets(method, ctx, N, seed):
         iff = IsolationForest(n_estimators=100, random_state=seed, n_jobs=-1).fit(cnn.extract_features(X3))
         ft = time.time() - t0
         f = lambda X: -iff.decision_function(cnn.extract_features(X.reshape(-1, L, 1)))
+    elif method[:3] in ('dae', 'cae') and method[3:].isdigit():
+        set_seeds(seed); vs = max(1, int(len(Xtr) * 0.2)); z = int(method[3:])
+        ae = (DenseAE if method[:3] == 'dae' else ConvCompactAE)(L, z)
+        info = ae.train(Xtr[:-vs], Xtr[-vs:], epochs=AE_EPOCHS, batch_size=BATCH)
+        ft = time.time() - t0
+        with open(os.path.join(REPORTS, COMPACT_LOG), 'a', encoding='utf-8') as fh:
+            fh.write(json.dumps(dict(item=ctx.get('item'), method=method, kind=method[:3], z=z, N=N,
+                                     seed=seed, **info)) + '\n')
+        f = ae.score
     elif method in USES_2D:
         ftr = ctx['feat_train'][:N]
         iff = IsolationForest(n_estimators=100, random_state=seed, n_jobs=-1).fit(ftr)
@@ -310,7 +331,9 @@ def run(items, methods_out, do_list):
                    'window_points': [int(XPTS[0]), int(XPTS[-1])], 'synthetic': os.path.basename(SYN),
                    'self_cal_budget': SELF_CAL_BUDGET,
                    'budgets': BUDGETS, 'fp_targets_pct': FP_TARGETS, 'channel': 'Calc(RAM-RAS)',
-                   'normalization': 'per-wavelength min-max, constants from 10k training pool (fixed across N)',
+                   'normalization': 'scalar min-max (one pair for all points), constants from 10k training pool '
+                                    '(fixed across N), no clipping',
+                   'render_ylim': list(RENDER_YLIM),
                    'splits': {'train_pool': N_TRAINPOOL, 'holdout': N_HOLDOUT, 'analysis': N_ANALYSIS},
                    'methods': METHODS_OUT, 'list_seed': LIST_SEED, 'list_budget': LIST_BUDGET,
                    'date': time.strftime('%Y-%m-%d %H:%M:%S')}, f, indent=2, ensure_ascii=False)
@@ -329,6 +352,7 @@ def run(items, methods_out, do_list):
             continue
         print(f'\n===== {proc} =====', flush=True)
         ctx = load_item(proc, synth)
+        ctx['item'] = proc
         if need2d:
             for nm, arr in [('train', ctx['train_pool']), ('holdout', ctx['holdout']),
                             ('analysis', ctx['analysis']), ('syn', ctx['syn'])]:
@@ -422,7 +446,7 @@ def run(items, methods_out, do_list):
                         thr_l = np.percentile(sc['holdout'], LIST_BUDGET)
                         det[method] = {'flag': np.concatenate([sc['syn'] >= thr_l, sc['analysis'] >= thr_l]),
                                        'score': np.concatenate([sc['syn'], sc['analysis']])}
-                    if method in ('ae', 'cnn1d'):
+                    if method in ('ae', 'cnn1d') or method in COMPACT_AE:
                         tf.keras.backend.clear_session()
                 if not skip_metrics:
                     rec = {'item': proc, 'method': method, 'N': N, 'n_seeds': len(m_seeds),

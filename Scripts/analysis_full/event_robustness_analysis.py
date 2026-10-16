@@ -45,7 +45,7 @@ def maha_eval(train, pre, post):
     """Fit empirical Mahalanobis on `train` (per-point min-max from train), self-cal P99.5 threshold,
     return (pre_rate, post_rate, baseline_dev_sigma, reaction_dev_sigma, onset_pt)."""
     lo, hi = train.min(0), train.max(0)
-    def nz(X): return np.clip((X - lo) / (hi - lo + 1e-8), 0.0, 1.0)
+    def nz(X): return (X - lo) / (hi - lo + 1e-8)      # affine, no clipping
     ntr = nz(train); mu = ntr.mean(0); P = np.linalg.pinv(np.cov(ntr.T))
     dtr = np.einsum('ij,jk,ik->i', ntr - mu, P, ntr - mu)
     thr = np.percentile(dtr, BUDGET)

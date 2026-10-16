@@ -123,7 +123,7 @@ def make_battery(ram_block, ras_block, seed=0, m_base=200, screen_frac=0.9, incl
 
 # ---------------- estimators / distances ----------------
 def norm_fit(a): return a.min(0), a.max(0)
-def apply_norm(a, lo, hi): return np.clip((a - lo) / (hi - lo + 1e-8), 0.0, 1.0)
+def apply_norm(a, lo, hi): return (a - lo) / (hi - lo + 1e-8)      # affine, no clipping
 
 
 def mcd_like(D, keep=0.95, iters=5):

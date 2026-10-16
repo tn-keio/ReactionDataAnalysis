@@ -28,8 +28,8 @@ class AutoencoderModel:
         x = Conv1D(16, 3, activation='relu', padding='same')(x)
         x = UpSampling1D(2)(x)
         
-        # Output layer
-        x = Conv1D(1, 3, activation='sigmoid', padding='same')(x)
+        # Output layer (linear: inputs are not clipped, so targets can lie outside [0, 1])
+        x = Conv1D(1, 3, activation=None, padding='same')(x)
         
         # Dynamic Cropping
         # Calculate expected output length after pooling and upsampling
