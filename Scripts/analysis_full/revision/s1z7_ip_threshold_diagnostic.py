@@ -1,4 +1,4 @@
-# Stage 1z7 (Reviewer #2, Methods-1 scope extension): why does the compact-AE holdout P99.5 threshold at IP
+# Stage 1z7: why does the compact-AE holdout P99.5 threshold at IP
 # rise ~4.8x after the module-2 re-base (s1z2: z = 8, 0.00080 -> 0.00383)?  Diagnostic only.
 #
 # Same set-up as s1z2_ip_rebase_diagnostic.py (unclipped, N = 500, v2 DenseAE, seeds 0-3), z = 8 and 16.

@@ -8,8 +8,6 @@
 #     pool    : fit maha on 167+167+166 of the three train_blocks -> flag rate on each B.eval_block
 #   transfer penalty = flag_rate - within_rate(test analyzer).  ~0 => analyzers harmonized => pooling OK.
 # Maha only -> py3.14, no TF.  Resumable per item.
-#
-# *** CODE-REVIEW STAGE: created but NOT executed. ***
 import os, csv, json
 import numpy as np
 import pandas as pd

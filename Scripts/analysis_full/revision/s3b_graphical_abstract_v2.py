@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Stage 3b (D1-05, M3-02, D1-02): the Graphical Abstract revised for R1.  Copy of
-Export_For_GitHub_CCA/Scripts/figures/make_graphical_abstract.py with only the text and the two bar values changed:
-  title "beats deep learning" -> the R1 claim (deep-learning baselines, small training windows);
+Stage 3b: the Graphical Abstract of the revised manuscript.  Copy of
+Scripts/figures/make_graphical_abstract.py with only the text and the two bar values changed:
+  title "beats deep learning" -> the revised claim (deep-learning baselines, small training windows);
   bars: Mahalanobis 0.99 vs the best deep-learning baseline at N = 500 (elbow-selected compact AE, 0.737;
         Table 1, v2 unclipped) instead of the old pooled 0.51;
   badges: real case = M-protein interference; bottom band: "candidate" (clinical yield not yet adjudicated).

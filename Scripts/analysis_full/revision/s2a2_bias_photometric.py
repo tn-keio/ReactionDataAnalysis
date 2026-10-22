@@ -1,9 +1,9 @@
-# Stage 2a-2 (Reviewer #2 Methods-2; author's correction 2026-10-20): the effect of each synthetic perturbation on
+# Stage 2a-2: the effect of each synthetic perturbation on
 # the REPORTED result, computed the way the analyzer computes a two-point endpoint result, replacing s2a's two
 # approximations (bias_approx: all pre-addition points vs the last 2; bias_react: the first post-addition point vs
 # the last 2, which discards the reaction that happens at reagent-2 addition).
 #   dA = mean(calc at the end points) - f * mean(calc at the base points)
-#     base / end points : Data/20261020_PhotometricPoints.csv (the author's instrument settings; n points counted
+#     base / end points : Data/20261020_PhotometricPoints.csv (the instrument settings; n points counted
 #                         backwards from the given point, inclusive)
 #     f                 : liquid-volume correction (S + R1) / (S + R1 + R2) from Data/parameter_mapped.csv, applied
 #                         when the base points precede reagent-2 addition, i.e. base point <= R2_PRE_POINT (19, the
@@ -48,7 +48,7 @@ PARAM = os.path.join(BASE, 'Data', 'parameter_mapped.csv')
 PROC = os.path.join(BASE, 'Data', 'BigData', 'processed')
 K_FULL = [0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 3, 5, 8]
 N_BENCH = 15000
-R2_PRE_POINT = 19                     # last photometric point before reagent-2 addition, all items (author, 2026-10-20)
+R2_PRE_POINT = 19                     # last photometric point before reagent-2 addition, all items
 MIN_BLOCK_N = 50                      # curves per (analyzer, month) block for a slope
 NEAR_ZERO = {'DB', 'CRP'}             # median value near zero (0.08, 0.13 mg/dL); see header
 BATTERY = {'Ca': 'ca', 'ALB': 'm2', 'IP': 'm2'}          # else 'main'

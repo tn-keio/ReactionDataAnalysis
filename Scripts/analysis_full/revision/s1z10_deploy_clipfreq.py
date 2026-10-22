@@ -1,4 +1,4 @@
-# Stage 1z10 (Reviewer #2, Methods-1, open items G5 / G6 / G3 of the M1 change list, 2026-10-16):
+# Stage 1z10:
 # how often were CLEAN and real curves clipped in the deployment-style analyses, and is the Mahalanobis
 # distance there really invariant to the per-point (diagonal) min-max map, given that the code inverts the
 # covariance with np.linalg.pinv (exact invariance needs a full-rank covariance)?
@@ -18,7 +18,7 @@
 # (no normalization) and counts decisions that differ from the normalized path, with the covariance rank
 # and condition number.  Identical decisions = the invariance holds in practice for that analysis.
 #
-# Existing scripts are imported unchanged (CodeFix_Register policy); the s9 / s4 / cu runs re-execute the
+# Existing scripts are imported unchanged; the s9 / s4 / cu runs re-execute the
 # unclipped code paths with outputs redirected here, and their result tables are compared with the stored
 # revision outputs (repro check).  Nothing outside Results/20261016_Rev_M1_DeployClipFreq is written.
 # Output: Results/20261016_Rev_M1_DeployClipFreq/<analysis>/clipfreq_<analysis>.csv (+ run outputs)

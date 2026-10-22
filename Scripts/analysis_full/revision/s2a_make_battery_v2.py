@@ -1,4 +1,4 @@
-# Stage 2a (Reviewer #2, Methods-2): EXTRA synthetic rows for the v2 benchmark, appended at evaluation
+# Stage 2a: EXTRA synthetic rows for the v2 benchmark, appended at evaluation
 # time to the three submitted batteries (which are NOT modified):
 #   (a) sub-1-sigma additive anomalies  A/B/C/E at k in K_LOW
 #       = clean + k * (row_k1 - clean), per base curve.  Exact: in all three generators the spike

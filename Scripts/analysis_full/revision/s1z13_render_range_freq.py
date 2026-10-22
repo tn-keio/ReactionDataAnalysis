@@ -1,4 +1,4 @@
-# Stage 1z13 (Reviewer #2, Methods-1; M1 change list §10.3 G4): how often would the 2D-CNN rendering range
+# Stage 1z13: how often would the 2D-CNN rendering range
 # [-0.05, 1.05] cut a curve?  The v2 benchmark renders each unclipped, scalar min-max normalized curve with the
 # y-axis fixed to [-0.05, 1.05]; points outside it are not drawn.  This counts, exactly as s1a counted values
 # outside [0, 1], the curves with at least one point outside [-0.05, 1.05] (same loaders, same constants from

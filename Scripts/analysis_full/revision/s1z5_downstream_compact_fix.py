@@ -1,4 +1,4 @@
-# Stage 1z5 (Reviewer #2, M2/M3 bookkeeping): re-run the v2 outputs that read the contaminated
+# Stage 1z5: re-run the v2 outputs that read the contaminated
 # compact-AE selection (dae_z_selection.csv; see s1z4_compact_selection_fix.py) with the corrected one.
 #   s2d_clinical_severity : k50_by_item.csv, clinical_severity{,_desirablebias}.csv, clinical_summary{...}.csv
 #   s2f_stats_v2 --family all : the 15-method sensitivity analysis (its _allvariants files are not on disk)

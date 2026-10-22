@@ -1,4 +1,4 @@
-# Stage 3d (M1-T11 follow-up, 2026-10-21): with the s3a set-up (v2 benchmark, unclipped, 21 items, 13 methods,
+# Stage 3d: with the s3a set-up (v2 benchmark, unclipped, 21 items, 13 methods,
 # simplified style: five methods in colour, the other eight in grey), redraw
 #   - Fig. 4(a) operating summary with the legend moved above the bars: in make_figures.fig3_operating_summary the
 #     upper-right legend hid the specificity marks of the three right-most methods (already so in the submission);

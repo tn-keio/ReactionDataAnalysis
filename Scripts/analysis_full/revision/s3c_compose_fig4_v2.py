@@ -1,4 +1,4 @@
-# Stage 3c (M1-T11, F1-01): Fig. 4 = (a) operating-point summary + (b) computational cost, stacked at native
+# Stage 3c: Fig. 4 = (a) operating-point summary + (b) computational cost, stacked at native
 # resolution exactly as the submitted compositor (figures/compose_fig4_fig5.py, compose_2panel) did, from the
 # simplified-style v2 panels of s3a; panel (a) is taken from s3d (legend moved above the bars, 2026-10-21) when
 # that output exists.  Also copies the simplified Fig. 2 and Fig. 3 under the final names.

@@ -1,13 +1,12 @@
 # Aggregate + figures for event_robustness_analysis.py output.  Reads event_robustness_results.csv.
 # Question answered: do maintenance / reagent-lot events invalidate a recently-trained maha model, item-dep?
-# Significance (PLAN §11 review): report BOTH
+# Significance: report BOTH
 #   - statistical: post_rate > per-item placebo 95th percentile
 #   - operational (primary conclusion): post_rate >= 2%  (>=10 alerts / 500 = force-retrain trigger)
 # Figures (FIGURE_RULES: gray main / color suppl, 600 dpi):
 #   figA_sensitivity_heatmap : item x {cell+lamp, mechanism, reagent} -> fraction of events with post_rate>=2%
 #   figB_postrate_by_event   : post_rate distributions per event type (events vs placebo), pooled
 #   figC_localization        : baseline-dev vs reaction-dev for significant events (optical vs chemical)
-# *** CODE-REVIEW STAGE: created but NOT executed (needs the results CSV). ***
 import os
 import numpy as np
 import pandas as pd

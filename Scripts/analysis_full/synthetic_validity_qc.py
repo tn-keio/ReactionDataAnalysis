@@ -1,4 +1,4 @@
-# Validity QC of the synthetic anomaly battery (paper §6 / reviewer defense).  Three checks:
+# Validity QC of the synthetic anomaly battery.  Three checks:
 #   QC1  clean ≈ real normal        : clean-synthetic flag rate (= FP on real base curves) ≈ FP budget.
 #   QC2  benign_offset design control: a common-mode offset (same A added to RAM & RAS) leaves Calc=RAM−RAS
 #        UNCHANGED -> must not be flagged (specificity built into the dual-wavelength channel).  Verify Calc

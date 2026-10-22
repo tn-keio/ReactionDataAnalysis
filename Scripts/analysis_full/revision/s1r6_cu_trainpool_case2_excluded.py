@@ -1,4 +1,4 @@
-# Stage 1r-6 (Reviewer #2 D1, option B): the two curves of the second Cu case (initial -5 and 3x repeat 93) lie in
+# Stage 1r-6: the two curves of the second Cu case (initial -5 and 3x repeat 93) lie in
 # the Cu training pool of the main benchmark (Table 1) and were used as "normal" training data at N = 5,000 and
 # 10,000.  Re-run the deterministic methods (empirical Mahalanobis, iterative-trimming robust, PCA) on Cu with and
 # without those two curves.  Replicates run_paper_method_comparison.py (main group, window 5-38, scalar min-max

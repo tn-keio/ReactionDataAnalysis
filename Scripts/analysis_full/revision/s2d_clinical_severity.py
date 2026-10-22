@@ -1,4 +1,4 @@
-# Stage 2d (Reviewer #2, Methods-2): tie detection to the reported-result bias.
+# Stage 2d: tie detection to the reported-result bias.
 #   (1) k50: the severity at which each method's recall crosses 50% (log-linear interpolation on the
 #       k grid 0.02..8), per item and anomaly type, plus the Mahalanobis norm at that severity.
 #   (2) clinically relevant severity: the smallest grid severity whose |bias| reaches the EFLM

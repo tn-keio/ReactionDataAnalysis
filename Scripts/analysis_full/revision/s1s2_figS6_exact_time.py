@@ -1,4 +1,4 @@
-# Fig. S6 redrawn from the exact-time S9 run (s1s), for the R1 revision (D2-03 / M1-S13).
+# Fig. S6 redrawn from the exact-time S9 run (s1s), for the revised manuscript.
 # Reuses event_robustness_figures.py unchanged; only the input, the output folder and the
 # heat-map colour range differ (CRP reaches 0.38 on the exact-time data, above the old vmax 0.15).
 # Input : Results/20260924_Rev_S9_RawLot/exact_time/event_robustness_results.csv

@@ -1,4 +1,4 @@
-# Stage 2i: example figures of the synthetic anomalies added in the revision (M2), for visual checking.
+# Stage 2i: example figures of the synthetic anomalies added in the revision, for visual checking.
 #   Fig. 1  non-additive types on real base curves: W_timewarp (r 0.95 -> 0.5) and S_saturation /
 #           premature termination (q 0.98 -> 0.2; q 0.5/0.2 exist only for the immunoturbidimetric assays and CRE),
 #           CRE and IgG, calc channel (main - sub), points 5-38, second-reagent addition marked.

@@ -1,7 +1,7 @@
-# Stage 1r-9 (Reviewer #2 D1, option B): Fig. S7 redrawn for the second Cu case of the revised manuscript
+# Stage 1r-9: Fig. S7 redrawn for the second Cu case of the revised manuscript
 # (the case of the original Fig. 5, now §S10.4), in the style of the final Fig. 5 (s1r8).
 # Why: the original panels carried the specimen date in the title and the last digits of the sample ID in the
-# legend; the redrawn figure carries neither (author's decision 2026-10-21).
+# legend; the redrawn figure carries neither.
 # Protocol as real_anomaly_cu_validation.py / s1e (unclipped normalization; identical values for this case):
 # training = the 500 most recent pre-event curves of analyzer #3 (single) or of #2+#3 (pooled); test = analyzer #3,
 # event date .. +70 days, case excluded; window 5-38.

@@ -1,12 +1,12 @@
-# Stage 1b (Reviewer #2, Methods-1): re-run the NON-deep detectors of the 21-item method comparison
+# Stage 1b: re-run the NON-deep detectors of the 21-item method comparison
 # with and without the np.clip in the min-max normalization.
 #
 #   --clip on  : reproduction check -- must reproduce the submitted JSONL values exactly
 #                (validates that the three loader groups reproduce Table 1's sources).
-#   --clip off : the unclipped comparison requested by the reviewer.
+#   --clip off : the unclipped comparison.
 #
 # Deep-learning detectors are deferred to the Stage-2/3 v2 benchmark (their decoders use a sigmoid
-# output, which cannot represent unclipped out-of-range targets; see CodeFix_Register.md).
+# output, which cannot represent unclipped out-of-range targets).
 # Output: Results/20260917_Rev_M1_Classical_{clip|noclip}/<group>/Reports/comparison.jsonl
 # Resume-aware (the pipeline skips (item, method, N) already present in the JSONL).
 

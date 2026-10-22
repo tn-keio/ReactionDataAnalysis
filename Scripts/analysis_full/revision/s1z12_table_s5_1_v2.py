@@ -1,4 +1,4 @@
-# Stage 1z12 (M1-S7, M1-U14): Table S5-1 (recall of intended anomalies at exactly matched clean false-positive
+# Stage 1z12: Table S5-1 (recall of intended anomalies at exactly matched clean false-positive
 # rates, N = 500, 21 items) rebuilt from the v2 (unclipped, 13-method) benchmark, and the S5.4 statement
 # "The ordering is identical to Table 1" checked against Table 1's mean recall at the P99.5 operating point.
 # Reads recall_at_fpr from the v2 JSONL; dae_elbow / dae_oracle resolved with the corrected selection

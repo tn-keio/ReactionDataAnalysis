@@ -1,12 +1,12 @@
-# Stage 2/3 (Reviewer #2, Methods-1/2/3): the v2 method comparison, 21-item panel.
+# Stage 2/3: the v2 method comparison, 21-item panel.
 #
 # Differences from the submitted run (everything else is the submitted pipeline, reused verbatim):
-#   M1  inputs unclipped for every method (rev_common.set_clip(False));
+#   (1) inputs unclipped for every method (rev_common.set_clip(False));
 #       1D-AE and 1D-CNN decoders with LINEAR output (models_v2.linear_outputs);
 #       2D-CNN rendering y-range widened from [0, 1] to [-0.05, 1.05] (training-pool min-max + 5%).
-#   M2  evaluation battery = submitted battery + rev2026_extra_<group>.parquet
+#   (2) evaluation battery = submitted battery + rev2026_extra_<group>.parquet
 #       (sub-1-sigma A/B/C/E, W_timewarp, S_saturation); metrics extended accordingly.
-#   M3  compact dense AEs 'dae1'...'dae16' (34-16-z-16-34, linear) as extra methods; for each fit the
+#   (3) compact dense AEs 'dae1'...'dae16' (34-16-z-16-34, linear) as extra methods; for each fit the
 #       clean validation MSE and the recall on an independent SELECTION battery are logged to
 #       Reports/dae_selection.jsonl (used later for the elbow rule and the oracle upper bound).
 # Output: Results/20260917_Rev_v2Benchmark[_pilot]/<group>/Reports/comparison.jsonl (resume-aware)
@@ -43,7 +43,7 @@ _ORIG_SCORE_SETS = M.score_sets
 _CUR = {}               # current (group, item) for logging
 
 
-# ------------------------------------------------------------------ M1: 2D rendering range
+# ------------------------------------------------------------------ (1) 2D rendering range
 def render_feats_v2(X, tag=''):
     """Copy of M.render_feats with the y-range widened (the only change)."""
     import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
@@ -63,7 +63,7 @@ def render_feats_v2(X, tag=''):
     return np.concatenate(feats, axis=0).astype('float32')
 
 
-# ------------------------------------------------------------------ M2: extended battery + metrics
+# ------------------------------------------------------------------ (2) extended battery + metrics
 def make_loader(group, base_loader):
     extra_all = pd.read_parquet(EXTRA[group])
 
@@ -109,7 +109,7 @@ def metrics_v2(flag_syn, meta, s_ho, thr):
     return m
 
 
-# ------------------------------------------------------------------ M3: compact dense AE
+# ------------------------------------------------------------------ (3) compact dense AE
 def score_sets_v2(method, ctx, N, seed):
     if not (method.startswith('dae') or method.startswith('cae')):
         return _ORIG_SCORE_SETS(method, ctx, N, seed)

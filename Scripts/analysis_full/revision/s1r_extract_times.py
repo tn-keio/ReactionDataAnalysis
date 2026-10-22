@@ -1,6 +1,6 @@
 # Stage 1r: one pass over the raw instrument CSVs to extract
 #   (A) every raw row of the Cu real-anomaly sample (all assays, all dates, no filters: repeats,
-#       dilutions and alarm-flagged rows included) -> the original and repeat Cu results (Discussion-1);
+#       dilutions and alarm-flagged rows included) -> the original and repeat Cu results;
 #   (B) a per-measurement time table for the 21 panel assays (same row filters as the pipeline) with the
 #       per-test measurement time M_Date, Value and the reagent lot -> exact lot-change onsets for S9.
 # The sample identifier is never printed or written in clear: outputs carry a salted hash.

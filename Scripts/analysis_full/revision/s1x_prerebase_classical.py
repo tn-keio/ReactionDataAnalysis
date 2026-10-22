@@ -1,4 +1,4 @@
-# Stage 1x (Reviewer #2, Methods-1 scope extension): S10b.3 / Table S5-3 -- the module-2 items (Ca, ALB, IP)
+# Stage 1x: S10b.3 / Table S5-3 -- the module-2 items (Ca, ALB, IP)
 # on their ORIGINAL (un-re-based) batteries and loaders, classical detectors, with and without np.clip.
 #
 # Same pipeline as s1b_classical_rerun.py; only a fourth loader group is registered at run time:

@@ -1,4 +1,4 @@
-# Stage 1z9b (Reviewer #2, M3 decision 2026-10-14): §3.6 / S6 statistics for the 13-method main family
+# Stage 1z9b: §3.6 / S6 statistics for the 13-method main family
 #   = the 11 submitted detectors + dae_elbow (validation-selected dense compact AE, primary) + cae8.
 # Replaces the 12-method family (11 + cae8) of s2f_stats_v2.py --family prespecified.
 #   1. assay-blocked rank tests (Friedman, mean ranks, Nemenyi, one-sided Wilcoxon maha > other with Holm):

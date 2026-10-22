@@ -1,10 +1,10 @@
-# Stage 2d-3 (Reviewer #2, Methods-2; author decision 2026-10-21): spike recall at the clinical limit over the curves
+# Stage 2d-3: spike recall at the clinical limit over the curves
 # whose reported value the spike actually changes ("hit" curves), instead of over all 200 spike positions.
 #   s2d/s2d2 choose the spike's k* from the median |bias| over hit curves (s2a2: |dA change| at k = 1 >= 5% of the
 #   item maximum), but read recall_A_spike_k{k*} from the v2 benchmark JSONL, which averages over all 200 curves
 #   (66-83% of them leave the reported value unchanged).  This script makes the recall use the same hit curves.
 #   (1) score: re-runs the v2 benchmark scoring (s2b_benchmark_v2: unclipped inputs, linear AE outputs, N = 500,
-#       holdout P99.5 threshold, seeds as in the benchmark) for the M2 table's methods, and stores the per-curve flag of
+#       holdout P99.5 threshold, seeds as in the benchmark) for the supplement table's methods, and stores the per-curve flag of
 #       every A_spike row with the hit mask.  The all-curve recall recomputed from these flags is checked against the
 #       JSONL value (exact for the deterministic methods; compact AE: TensorFlow, reported as a difference).
 #   (2) summarize: per yardstick, hit-curve recall at s2d2's k* (react_only rows of clinical_severity*.csv), the
@@ -32,7 +32,7 @@ YS = os.path.join(RES, '20261020_Rev_M2_Yardsticks')
 BIAS = os.path.join(RES, '20261020_Rev_M2_BiasPhotometric', 'bias_summary_photometric.csv')
 N_MAIN = 500
 BUDGET = 99.5
-METHODS = ['maha', 'maha_robust', 'pca', 'lof', 'dae_elbow']      # the M2 table's methods
+METHODS = ['maha', 'maha_robust', 'pca', 'lof', 'dae_elbow']      # the supplement table's methods
 YARDSTICKS = (('EFLM desirable bias', 'desirable_bias_pct', 'clinical_severity_desirablebias.csv'),
               ('EFLM desirable TEa', 'TEa_pct', 'clinical_severity.csv'),
               ('CLIA (reference)', 'CLIA_pct', 'clinical_severity_desirablebias.csv'))

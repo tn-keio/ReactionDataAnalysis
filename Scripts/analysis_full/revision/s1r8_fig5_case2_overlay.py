@@ -1,4 +1,4 @@
-# Stage 1r-8 (Reviewer #2 D1, option B): compact colour version of Fig. 5 (author's request 2026-10-21).
+# Stage 1r-8: compact colour version of Fig. 5.
 # The three measurements of the second Cu case are overlaid in ONE curve panel and ONE distance panel instead of
 # three panels each.  Values come from s1r7.compute() unchanged (same protocol as s1r5).
 #   (a) the three curves; normal +/-2 SD band of each training analyzer (#3 for the initial measurement,
@@ -26,7 +26,7 @@ import s1r7_fig5_case2 as F7          # noqa: E402
 FIGDIR = os.path.join(F7.C.BASE, 'ForPaper', 'Rev_Fig5_Case2', 'Figures_overlay')
 ORDER = ['initial', 'repeat1_3x', 'repeat2_5x_reported']
 COL = {'initial': '#D55E00', 'repeat1_3x': '#E69F00', 'repeat2_5x_reported': '#0072B2'}   # Okabe-Ito
-# Legends are kept short and large (author's request 2026-10-21); analyzer, training-set size, the shaded points 1-4,
+# Legends are kept short and large; analyzer, training-set size, the shaded points 1-4,
 # the 70-day test window and the ranks are given in the caption instead.
 NAME = {'initial': 'Initial, −5 µg/dL',
         'repeat1_3x': '3-fold dilution, 93 µg/dL',

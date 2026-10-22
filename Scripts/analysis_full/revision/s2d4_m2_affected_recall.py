@@ -1,7 +1,7 @@
-# Stage 2d-4 (Reviewer #2, Methods-2; author decisions 2026-10-21): recall at the clinical limit over the curves whose
+# Stage 2d-4: recall at the clinical limit over the curves whose
 # reported value the anomaly actually changes ("affected" curves), for every anomaly type whose effect varies by curve.
-#   Author's policy: anomalies that leave the reported value unchanged may still be abnormal reactions and must be
-#   detected (shown by the main benchmark); M2 relates each method's sensitivity to the effect on the reported value,
+#   Policy: anomalies that leave the reported value unchanged may still be abnormal reactions and must be
+#   detected (shown by the main benchmark); this analysis relates each method's sensitivity to the effect on the reported value,
 #   so the clinical-limit analysis counts recall only on curves whose reported value was affected.
 #   - A_spike     : affected = s2a2's hit mask, fixed at k = 1 (|dA change| >= 5% of the item maximum), every k.
 #   - S_saturation, W_timewarp : affected = s2a2's 'substantive change' mask at each severity
@@ -11,7 +11,7 @@
 #   In every case k* (q*, r*) is s2d2's react_only severity, i.e. the median |bias| over the same affected curves.
 # s2d3 (spike only) is superseded by this script; its folder is kept as the record of 2026-10-21 morning.
 #   (1) score: re-runs the v2 benchmark scoring (s2b_benchmark_v2: unclipped inputs, linear AE outputs, N = 500,
-#       holdout P99.5 threshold, the benchmark's seeds) for the M2 table's methods and stores the per-curve flag of
+#       holdout P99.5 threshold, the benchmark's seeds) for the supplement table's methods and stores the per-curve flag of
 #       every A_spike, S_saturation and W_timewarp row with its affected mask.  The all-curve recall from these flags
 #       is checked against the benchmark JSONL (main run; q = 0.5 / 0.2 from the prozone run): exact for the
 #       deterministic methods.  The compact AE is retrained and TensorFlow training is not bit-reproducible here
@@ -43,7 +43,7 @@ YS = os.path.join(RES, '20261020_Rev_M2_Yardsticks')
 BIAS = os.path.join(RES, '20261020_Rev_M2_BiasPhotometric', 'bias_summary_photometric.csv')
 N_MAIN = 500
 BUDGET = 99.5
-METHODS = ['maha', 'maha_robust', 'pca', 'lof', 'dae_elbow']      # the M2 table's methods
+METHODS = ['maha', 'maha_robust', 'pca', 'lof', 'dae_elbow']      # the supplement table's methods
 TYPES = ['A_spike', 'S_saturation', 'W_timewarp']
 KEY = {'A_spike': 'recall_A_spike_k{:g}', 'S_saturation': 'recall_S_q{:g}', 'W_timewarp': 'recall_W_r{:g}'}
 YARDSTICKS = (('EFLM desirable bias', 'desirable_bias_pct', 'clinical_severity_desirablebias.csv'),

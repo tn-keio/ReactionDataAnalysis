@@ -1,4 +1,4 @@
-# Stage 1z4 (Reviewer #2, M3 bookkeeping): corrected compact-AE z selection for the v2 benchmark.
+# Stage 1z4: corrected compact-AE z selection for the v2 benchmark.
 #
 # Defect found 2026-10-13: s2c_summarize_v2.py groups Reports/dae_selection.jsonl by z without filtering
 # the method family.  The later runs (run_v2_cae.ps1: cae2/cae8 and the lr3e4 variants) append to the same
@@ -7,7 +7,7 @@
 # (2026-09-18 07:33) therefore hold contaminated dae_elbow / dae_oracle rows; 00_Stage2_Results_v2Benchmark.md
 # §1 (0.737 / 0.743) was written from the earlier, clean summary.
 # This script applies the same elbow / oracle rule to the dense-AE rows only (methods dae1..dae16) and
-# writes corrected copies; the original files are NOT modified (s2c is not changed: CodeFix register).
+# writes corrected copies; the original files are NOT modified (s2c is not changed).
 # Output: Results/20261013_Rev_M3_CompactSelFix/{dae_z_selection_fixed.csv, per_item_v2_fixed.csv,
 #         panel_v2_fixed.csv, selection_old_vs_new.csv}
 # py3.14 (no TensorFlow).

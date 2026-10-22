@@ -1,4 +1,4 @@
-# Stage 1a (Reviewer #2, Methods-1): how often are clean and perturbed curves clipped?
+# Stage 1a: how often are clean and perturbed curves clipped?
 #
 # Loads every 21-panel item exactly as the submitted method comparison did (same loaders, same
 # scalar min-max constants from the 10,000-sample training pool), but with the clip removed, and

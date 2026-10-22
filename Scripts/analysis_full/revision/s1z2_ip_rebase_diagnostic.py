@@ -1,4 +1,4 @@
-# Stage 1z2 (Reviewer #2, Methods-1 scope extension): why does the module-2 re-base lower the compact-AE
+# Stage 1z2: why does the module-2 re-base lower the compact-AE
 # worst-item recall at IP from 0.293 (pre) to 0.024 (post)?  Diagnostic only; no table value is produced.
 #
 # Both configurations unclipped (rev_common.set_clip(False)), N = 500, the v2 DenseAE (s2b_benchmark_v2

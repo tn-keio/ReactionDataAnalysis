@@ -1,7 +1,7 @@
 # Stage 1t (compare): file order (unclipped re-runs) vs time order (s1t_run_timeorder), side by side.
 #   --what classical : Table 1 panel metrics per method and N, per-item differences, rank agreement
 #   --what dl        : v2 benchmark, N = 500, CRE and TP
-#   --what others    : Cu case, Table S3 workload, S4 pooling/transfer, S14 lead times, s1m arm A, R2
+#   --what others    : Cu case, Table S3 workload, S4 pooling/transfer, S14 lead times, s1m arm A, rolling evaluation
 # Output: Results/20260925_Rev_TimeOrder/compare_<what>.csv and printed summaries.
 import os
 import sys

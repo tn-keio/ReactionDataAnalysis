@@ -1,12 +1,12 @@
-# Stage 1r-5 (Reviewer #2 D1, option B): the second Cu case (M-protein, initial -5, 3x-diluted repeat 93,
+# Stage 1r-5: the second Cu case (M-protein, initial -5, 3x-diluted repeat 93,
 # 5x-diluted repeat 99 reported) recomputed with exactly the protocol of the paper's Cu case (S10):
-#   real_anomaly_cu_validation.run() with s1e's unclipped maha_fit (and the original clipped one, for the M1
-#   response); train on the 500 most recent curves before the
+#   real_anomaly_cu_validation.run() with s1e's unclipped maha_fit (and the original clipped one, for
+#   comparison); train on the 500 most recent curves before the
 #   case date (single analyzer = the analyzer that measured the curve, the other analyzer, and pooled #2+#3);
 #   windows 5-38 and 1-38; test set = same analyzer, case date .. +70 days, case rows excluded.
 # All three curves are taken from the raw files (repeat 2 is not in processed: C1/S_Date blank); the first two are
 # checked against processed.  Adds the distance-scale multiple, points outside the training range (would-be
-# clipped), and per-point |z| summaries per phase (for M2).
+# clipped), and per-point |z| summaries per phase.
 # Output: Results/20261019_Rev_CuCase2_Aligned/  (local only; contains result values, no sample IDs)
 import os
 import sys

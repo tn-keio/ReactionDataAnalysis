@@ -1,9 +1,9 @@
-# Stage 1j (Reviewer #2, Methods-1 scope extension): supplementary Table S5 — the per-method review
+# Stage 1j: supplementary Table S5 — the per-method review
 # budget under the deployment protocol — re-computed WITHOUT np.clip.
 #
 # ForPaper/Suppl10_ReviewBurden/compare_methods_unified.py (module "C") measures, for six classical
 # detectors, the flag rate of the rolling recent-N model with a self-calibrated P99.5 threshold over
-# the whole record.  Its apply_norm clips (CodeFix A10).  Nothing is modified here: C.apply_norm,
+# the whole record.  Its apply_norm clips.  Nothing is modified here: C.apply_norm,
 # C.PANEL and C.OUT are replaced at run time, exactly as ForPaper/Rev09_MethodBudget_Panel21 does.
 #
 # Acceptance check: the unclipped empirical-Mahalanobis flag rate must be close to the unclipped

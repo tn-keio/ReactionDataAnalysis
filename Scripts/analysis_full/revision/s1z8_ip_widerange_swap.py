@@ -1,4 +1,4 @@
-# Stage 1z8 (Reviewer #2, Methods-1 scope extension): intervention test for s1z7.
+# Stage 1z8: intervention test for s1z7.
 # s1z7 found that the IP compact-AE holdout P99.5 sits on ~1% of normal curves with a wide within-curve range
 # (max - min > 0.3, normalized units), present at the same rate in both windows (~1%), but the post-re-base
 # N = 500 training set holds only 4 such curves (max range 0.47; holdout up to 0.92) against 7 (max 0.79) pre.

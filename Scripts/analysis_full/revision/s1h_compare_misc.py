@@ -1,8 +1,8 @@
-# Stage 1h: comparisons for the M1 scope extension and the R2 summary.
+# Stage 1h: comparisons for the unclipped re-runs and the rolling-evaluation summary.
 #   S9 : Results/20260718_EventRobustness  vs 20260917_Rev_M1_S9S4_noclip/event
 #   S4 : Results/20260718_InterAnalyzer    vs 20260917_Rev_M1_S9S4_noclip/inter
 #   Cu : Results/20260917_Rev_M1_CuCase/{clip,noclip}
-#   R2 : Results/20260917_Rev_R2_RollingContemporaneous -> panel tables
+#   rolling : Results/20260917_Rev_R2_RollingContemporaneous -> panel tables
 # Writes CSV/markdown next to each new result.  py3.14.
 
 import os

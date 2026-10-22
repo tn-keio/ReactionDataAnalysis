@@ -4,7 +4,6 @@
 #   figA_transfer_matrix : train_src {#1,#2,#3,pool} x test_analyzer -> mean flag rate (diag = within)
 #   figB_penalty_by_item : transfer penalty (cross-src flag - within) per item  (0 = harmonized)
 #   figC_pool_vs_single  : (a) within vs pool flag rate per item;  (b) days to accrue 500 (single vs pooled)
-# *** CODE-REVIEW STAGE: created but NOT executed (needs the results CSV). ***
 import os
 import numpy as np
 import pandas as pd

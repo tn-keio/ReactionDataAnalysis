@@ -1,4 +1,4 @@
-# Stage 1u (Reviewer #2, Methods-1 scope extension): S3.4 "Confirmation under a rolling protocol"
+# Stage 1u: S3.4 "Confirmation under a rolling protocol"
 # (worst-item recall E 0.839 / R 0.468 / LW 0.115; Fig. S2(b)-(d)) re-computed with and without np.clip.
 #
 # Reuses run_estimator_selection.py unchanged: only its module-global apply_norm, norm_fit and OUT are

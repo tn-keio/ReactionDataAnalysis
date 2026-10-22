@@ -1,4 +1,4 @@
-# Stage 1z11 (Progress Brief D-4; S14.4-14.6, Fig. S12): per_analyzer_lot.py picks the IgG lot from the data
+# Stage 1z11 (S14.4-14.6, Fig. S12): per_analyzer_lot.py picks the IgG lot from the data
 # ("the lot in force at the peak saline week" of each analyzer).  On analyzer #1 that rule picks lot 000408
 # (switched 2025-03-21), whereas the Fig. S12 legend names 000406 as the implicated IgG lot and the raw lot
 # records show 000406 on #1 from late 2024.  Re-run IgG only, unclipped (as s1g rev13), with the lot fixed to

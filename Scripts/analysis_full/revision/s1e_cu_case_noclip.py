@@ -1,4 +1,4 @@
-# Stage 1e (Reviewer #2, Methods-1 scope extension): the real Cu interference case (S10, Fig. 5)
+# Stage 1e: the real Cu interference case (S10, Fig. 5)
 # re-computed with and without np.clip in the per-point min-max normalization.
 #
 # Reuses real_anomaly_cu_validation.py unchanged: only its module-global maha_fit, OUT and FIGDIR are

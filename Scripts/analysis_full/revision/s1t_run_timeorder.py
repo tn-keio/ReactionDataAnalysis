@@ -3,7 +3,7 @@
 # unclipped re-runs were done (s1b, s1d, s1e, s1f, s1g, s1m).  All runs are unclipped.
 #   classical : Table 1 non-deep detectors (maha, maha_robust, pca, lof), N 500/5,000/10,000, 21 assays  [TF env]
 #   dl        : minimal deep-learning check: v2 benchmark, N = 500, CRE and TP          [TF env]
-#   r2        : R2 rolling evaluation (s1d)
+#   r2        : rolling evaluation (s1d)
 #   burden    : Table S3 workload (rev06), fixed-reference IgM/IgG (rev11), per-analyzer lead times (rev13)
 #   cu        : Cu real case (s1e)
 #   s4        : transferability / pooling (s1f --which inter)

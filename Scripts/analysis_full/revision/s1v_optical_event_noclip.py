@@ -1,4 +1,4 @@
-# Stage 1v (Reviewer #2, Methods-1 scope extension): the 2021-08 optical event of S10b.2 / S14.2
+# Stage 1v: the 2021-08 optical event of S10b.2 / S14.2
 # (module-2 flag rates 65-86%, module-1 <1.5%, Spearman rho(main wavelength, flag rate) ~ 0.11)
 # re-computed with and without np.clip.
 #

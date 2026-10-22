@@ -7,7 +7,7 @@
 #   fit Empirical maha / Robust maha / PCA, threshold = training-window P99.5 (self-calibration).
 # Score a FIXED probe (CRE synthetic anomalies) with each month's model -> recall/specificity(t)
 #   and the 0/1 flag vector.  Consistency = agreement / Cohen's kappa / Spearman between
-#   consecutive months (last month vs this month) -> directly answers the reviewer concern.
+#   consecutive months (last month vs this month).
 # No TensorFlow: fast, CPU-only.
 
 import os, sys, json

@@ -2,14 +2,14 @@
 #
 # The revision claims a two-level design: the rolling model screens single curves (sporadic errors),
 # and a cluster of flags under a FIXED reference indicates a systematic change (reagent lot, optics).
-# A reviewer will ask what that costs: if every month produced a cluster the laboratory could not act
+# The question is what that costs: if every month produced a cluster the laboratory could not act
 # on it.  This script therefore measures, for all 21 panel assays over the whole record, how many
 # months exceed the alert levels used in S14 (>=20% of curves flagged; >=5% as a looser level), and
 # separates months that coincide with an independently documented event from those that do not.
 #
 # Protocol (identical to ForPaper/Rev11_FixedReference_IgEvent/probe_fixed_reference.py):
 #   fit once on the earliest 500 curves of the assay, score every subsequent curve, monthly flag rate,
-#   months with >= MIN_MONTH_N curves.  Normalization WITHOUT clipping (CodeFix A9).
+#   months with >= MIN_MONTH_N curves.  Normalization WITHOUT clipping.
 # Memory: the wrapped loader materialises a whole assay several times over; a lean loader is used here
 # and validated against it (--verify-loader), because the OS killed the earlier combined runs.
 # Output: Results/20260918_Rev_FixedReference_Panel21/{monthly.csv, summary.csv}

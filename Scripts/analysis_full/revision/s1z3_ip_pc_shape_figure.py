@@ -1,4 +1,4 @@
-# Stage 1z3 (Reviewer #2, Methods-1 scope extension): visual check of the s1z2 finding at IP --
+# Stage 1z3: visual check of the s1z2 finding at IP --
 # does the type-E (baseline) perturbation coincide with a principal direction of normal variation
 # after the module-2 re-base?  Same data as s1z2 (unclipped, N = 500 training curves, k >= 2 anomalies).
 #   top    : PC1 / PC2 loadings of the training curves vs the median unit-norm type-E perturbation

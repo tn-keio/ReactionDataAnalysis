@@ -8,8 +8,6 @@
 #   Report post_flag_rate (operational alert rate) and its localization (baseline vs reaction points).
 # A PLACEBO (random non-event dates, same "next-500" extraction) gives the per-(analyzer,item) null so an
 # event effect is separated from natural calendar drift.  Maha only -> py3.14, no TF.  Resumable per item.
-#
-# *** CODE-REVIEW STAGE: created but NOT executed. ***
 import os, csv, json
 import numpy as np
 import pandas as pd

@@ -1,5 +1,5 @@
-# Stage 1z9a (Reviewer #2, M3 decision 2026-10-14): per-sample flags for the 13-method main analysis.
-# The M3 decision keeps the submitted 1D-AE and adds TWO compact AEs to Table 1: the validation-selected
+# Stage 1z9a: per-sample flags for the 13-method main analysis.
+# The revised Table 1 keeps the submitted 1D-AE and adds TWO compact AEs to Table 1: the validation-selected
 # dense AE (dae_elbow; z per item from dae_z_selection_fixed.csv, N = 500) and the convolutional cae8.
 # s2g_sample_level_tests.py wrote flags for cae8 and dae8 but not for dae_elbow (z differs by item), and
 # never for the two ensembles (AE + 2D-CNN, AND cascade and score-level max).  This script writes, per
@@ -10,7 +10,7 @@
 #     ONE seed; AND of the two P99.5 thresholds / max of holdout-z-normalised scores, single P99.5)
 #   The ae and 2D scores are refitted here, so they are not bit-identical to the ae / twod_only columns of
 #   the s2g flags (TensorFlow nondeterminism); the ensembles are internally consistent per seed.
-# Existing scripts are imported unchanged (CodeFix_Register policy); only module globals are redirected.
+# Existing scripts are imported unchanged; only module globals are redirected.
 # Output: Results/20261015_Rev_M3_Stats13/samplelevel_extra/flags_<item>_s<seed>.parquet,
 #         dae_selection_s1z9a.jsonl (score_sets_v2 log)
 # TF venv.  Usage: python s1z9a_samplelevel_flags_13.py [--items ...]   (one item per process is safest)

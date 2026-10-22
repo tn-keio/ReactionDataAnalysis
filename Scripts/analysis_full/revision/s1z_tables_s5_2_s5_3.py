@@ -1,4 +1,4 @@
-# Stage 1z (Reviewer #2, Methods-1 scope extension): Tables S5-2 and S5-3 rebuilt from unclipped runs.
+# Stage 1z: Tables S5-2 and S5-3 rebuilt from unclipped runs.
 #   S5-2  type D recall by lag, N = 500, 21 items: mean over items of per_item_v2.csv (v2 benchmark),
 #         with the compact-AE selection corrected by s1z4_compact_selection_fix.py (run that first).
 #   S5-3  before / after the module-2 re-base, N = 500:

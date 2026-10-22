@@ -1,4 +1,4 @@
-# Shared configuration for the revision (Reviewer #2) re-analyses.
+# Shared configuration for the revision re-analyses.
 #
 # RULE: existing scripts are NOT modified.  Everything here imports the reviewed pipeline
 # (ExperimentalCode/Scripts/run_paper_method_comparison.py) and overrides configuration / functions

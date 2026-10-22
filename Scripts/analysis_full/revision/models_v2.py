@@ -1,11 +1,11 @@
-# Model-side overrides for the v2 benchmark (Reviewer #2, Methods-1 / Methods-3).
+# Model-side overrides for the v2 benchmark.
 #
 # 1) linear_outputs(): the submitted 1D-AE (Code/src/model_autoencoder.py L32) and 1D-CNN decoder
 #    (Code/src/model_1d_cnn.py L94) end in Conv1D(activation='sigmoid'), which cannot reconstruct
 #    unclipped targets outside (0, 1).  Both modules import Conv1D into their own namespace, so
 #    replacing that module attribute with a wrapper that turns activation='sigmoid' into a linear
 #    output changes ONLY the output activation, leaving every other layer identical.  The source
-#    files are not modified (see CodeFix_Register.md A3/A4).
+#    files are not modified.
 # 2) DenseAE: compact-bottleneck dense autoencoder 34-16-z-16-34 (ReLU hidden, linear output),
 #    same optimiser / loss / epochs / batch / early stopping as the submitted AE.
 
@@ -61,8 +61,8 @@ class DenseAE:
 class ConvCompactAE:
     """Convolutional autoencoder with a TRUE bottleneck: the submitted 1D-AE topology
     (Conv16-pool-Conv8-pool / mirrored decoder) with a linear Dense(z) code inserted between
-    encoder and decoder, and a linear output.  Answers the reviewer's 'compact bottleneck' request
-    for the convolutional family (the dense DenseAE covers the fully-connected family)."""
+    encoder and decoder, and a linear output: the compact-bottleneck model
+    of the convolutional family (the dense DenseAE covers the fully-connected family)."""
 
     def __init__(self, input_length, z, lr=1e-3):
         import math

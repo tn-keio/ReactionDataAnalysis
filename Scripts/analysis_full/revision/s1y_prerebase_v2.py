@@ -1,4 +1,4 @@
-# Stage 1y (Reviewer #2, Methods-1 scope extension): Table S5-3 -- the three module-2 items (Ca, ALB, IP)
+# Stage 1y: Table S5-3 -- the three module-2 items (Ca, ALB, IP)
 # on their ORIGINAL (un-re-based) batteries and loaders, run through the v2 benchmark unchanged.
 #
 # Reuses s2b_benchmark_v2.py as is (install(): unclipped input, linear AE/CNN outputs, 2D y-range

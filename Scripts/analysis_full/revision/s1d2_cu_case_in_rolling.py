@@ -1,6 +1,6 @@
-# Stage 1d-2 (R2 follow-up): where do the two abnormal curves of the Cu case of Section 3.11
+# Stage 1d-2: where do the two abnormal curves of the Cu case of Section 3.11
 # (initial -5 on #3, 3-fold repeat 93 on #2) fall in the rolling evaluation of s1d, and with what
-# ratio to the threshold are they scored there?  The 09-25 log quotes 6,047x and 309x without a stored output.
+# ratio to the threshold are they scored there?
 # Same set-up as s1d (pooled analyzers, monthly anchor, train = 500 curves before it, test = next 500,
 # scalar min-max from the training window, no clipping, empirical Mahalanobis, self-calibrated P99.5);
 # s1d's own functions are imported, nothing is re-implemented except locating the two rows.

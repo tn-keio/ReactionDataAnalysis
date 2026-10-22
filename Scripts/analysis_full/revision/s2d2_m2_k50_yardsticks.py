@@ -1,4 +1,4 @@
-# Stage 2d-2 (Reviewer #2, Methods-2; author decision 2026-10-19): the M2 supplement table with three yardsticks
+# Stage 2d-2: the supplement table with three yardsticks
 # and k50 for all thirteen Table 1 methods (cae8 and the classical/DL methods that s2d did not cover).
 #   (1) k50 at N = 500 for the 13 methods (+ dae_oracle as the S5 upper bound), with the corrected compact-AE
 #       selection (s1z4: dae_z_selection_fixed.csv).
@@ -103,7 +103,7 @@ def main():
     bat = os.path.join(OUT, 'yardstick_inputs')
     os.makedirs(bat, exist_ok=True)
     shutil.copyfile(SEL, os.path.join(OUT, 'dae_z_selection.csv'))
-    # bias: s2a2's two-point endpoint computation (author's photometric points, liquid-volume correction, empirical
+    # bias: s2a2's two-point endpoint computation (photometric points, liquid-volume correction, empirical
     # calibration, full k grid) replaces s2a's bias_summary (k <= 0.5 only; approximations).  s2d reads 'median'
     # as tag step_incl and 'react_median' as react_only; combine() relabels them (BIAS_DEF).
     bs = pd.read_csv(BIAS_SRC)

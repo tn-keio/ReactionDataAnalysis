@@ -1,11 +1,11 @@
-# Stage 2i-2 (Reviewer #2, Methods-2; 2026-10-21): redraw of s2i's Fig. 1 (non-additive anomalies on a typical base
-# curve, CRE and IgG) for the supplement, consistent with the revised M2 analysis.
+# Stage 2i-2: redraw of s2i's Fig. 1 (non-additive anomalies on a typical base
+# curve, CRE and IgG) for the supplement, consistent with the revised analysis.
 #   Changes from s2i fig1 (the 2026-09-26 file is kept unchanged):
 #   (1) the legend bias is the two-point endpoint read-out of s2a2 (photometric points, liquid-volume correction f,
 #       median per-analyzer-month calibration slope, % of the assay's median reported value), not the earlier
 #       reaction-phase approximation; it is the median over the curves whose reported value the anomaly changed
 #       (s2a2's mask: |dA change| > 1% of the median clean |dA|), with that number of curves out of 200;
-#   (2) the second-reagent addition is drawn after point 19 (author, 2026-10-20: the last pre-addition point is 19
+#   (2) the second-reagent addition is drawn after point 19 (the last pre-addition point is 19
 #       for every assay); the first point modified by the warp/cap (t0 + 2, where t0 is the generator's reaction onset
 #       and ts = t0 + 1 the unmodified anchor) is drawn
 #       separately (CRE t0 = point 22, IgG t0 = point 20; s2a recovers t0 from the E_baseline k = 1 rows);

@@ -1,4 +1,4 @@
-# Stage 1f (Reviewer #2, Methods-1 scope extension): S9 (maintenance / reagent-lot robustness) and
+# Stage 1f: S9 (maintenance / reagent-lot robustness) and
 # S4 (inter-analyzer transferability) re-computed WITHOUT np.clip.
 #
 # Reuses event_robustness_analysis.py and inter_analyzer_analysis.py unchanged: their module-level

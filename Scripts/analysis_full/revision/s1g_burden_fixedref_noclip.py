@@ -1,4 +1,4 @@
-# Stage 1g (Reviewer #2, Methods-1 scope extension): analyses built on
+# Stage 1g: analyses built on
 # ForPaper/Suppl10_ReviewBurden/measure_review_burden_unified.py (module "B"), re-run WITHOUT np.clip:
 #   rev06 : Table S3 review burden, 21-item panel (ForPaper/Rev06_ReviewBurden_Panel21)   -> Section 4.4, 92.3/day
 #   rev11 : fixed-reference IgG/IgM monthly + weekly onset (ForPaper/Rev11_FixedReference_IgEvent) -> Section 3.12

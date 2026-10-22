@@ -1,4 +1,4 @@
-# Stage 1z6 (Reviewer #2, Methods-1, plan step 2): normalization constants from the N training curves only.
+# Stage 1z6: normalization constants from the N training curves only.
 #
 # §2.5 says lo/hi come from the 10,000-curve training pool and are fixed across N, which reads oddly next to
 # "trained on as few as 500 curves".  Here, for every N, lo/hi are recomputed from train_pool[:N] alone

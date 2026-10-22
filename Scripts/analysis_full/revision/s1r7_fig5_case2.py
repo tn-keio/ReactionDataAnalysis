@@ -1,4 +1,4 @@
-# Stage 1r-7 (Reviewer #2 D1, option B): Fig. 5(a)(b) redrawn for the second Cu case (M-protein; initial -5,
+# Stage 1r-7: Fig. 5(a)(b) redrawn for the second Cu case (M-protein; initial -5,
 # 3-fold repeat 93, 5-fold repeat 99 reported), with the protocol of s1r5 (unclipped normalization, the 500 most
 # recent pre-event curves of the analyzer that measured the curve, P99.5 self-calibrated threshold, window 5-38;
 # test set = same analyzer, case date .. +70 days, case rows excluded).

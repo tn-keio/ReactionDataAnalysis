@@ -1,4 +1,4 @@
-# Stage 2d-5 (Reviewer #2, Methods-2): Markdown tables for Supplementary §S8.5-S8.6 from the M2 result files
+# Stage 2d-5: Markdown tables for Supplementary §S8.5-S8.6 from the result files
 # (summary statistics only; no new estimation).
 #   Table S8-2  k50 per method (median over 84 assay-type combinations, censored at > 8 sigma-bar)   <- s2d2
 #   Table S8-3  recall of kinetic slowing / premature termination by level (N = 500, P99.5)        <- v2 JSONL (+ prozone)

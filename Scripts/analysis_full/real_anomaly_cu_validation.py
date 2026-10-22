@@ -5,8 +5,6 @@
 # held-out anomaly is flagged.  Two training variants: single-analyzer #3, and pooled #2+#3.  Window 1-38
 # is also computed for context (does 5-38 alone catch it, without the excluded early spike?).
 # Maha only -> py3.14, no TF.
-#
-# *** CODE-REVIEW STAGE: created but NOT executed. ***
 import os, json
 import numpy as np
 import pandas as pd

@@ -1,4 +1,4 @@
-# Stage 1w (Reviewer #2, Methods-1 scope extension): S11.2 monthly flag rates at BOTH training sizes.
+# Stage 1w: S11.2 monthly flag rates at BOTH training sizes.
 #
 # s1g re-ran Table S3 without np.clip, but the wrapped measure_review_burden_unified.py only writes the
 # monthly series for N=500.  S11.2 also quotes N=5,000 monthly values (IgM 2023-06..11, IgA 2024-04)

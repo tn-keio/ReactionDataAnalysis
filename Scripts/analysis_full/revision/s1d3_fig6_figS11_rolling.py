@@ -1,4 +1,4 @@
-# Stage 1d-3 (R2, 2026-10-21): Fig. 6 and Fig. S11 redrawn for the rolling evaluation of s1d (each monthly
+# Stage 1d-3: Fig. 6 and Fig. S11 redrawn for the rolling evaluation of s1d (each monthly
 # rolling recent-500 model scored on the next 500 curves and on anomalies injected into them), replacing the
 # fixed-probe kappa figures of the submission.  Data: s1d series.csv, no clipping, unscreened battery.
 #   Fig. 6  (a) per assay: median and worst month of k>=2 recall, empirical / robust / PCA, line at 0.875

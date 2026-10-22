@@ -1,5 +1,5 @@
-# Stage 3a (M1-T11, F1-01, M1-U12): Fig. 2-4 redrawn from the v2 benchmark (unclipped, 21 items, the 13 Table 1
-# methods), in two styles for the author to compare (decision 2026-10-19: draw both, then choose):
+# Stage 3a: Fig. 2-4 redrawn from the v2 benchmark (unclipped, 21 items, the 13 Table 1
+# methods), in two styles:
 #   original   : every method in its own colour/marker/line style (the submitted style)
 #   simplified : five methods in colour (empirical and robust Mahalanobis, PCA, LOF, the elbow-selected compact AE;
 #                LOF included because the text discusses it at N = 5,000), the other eight in
@@ -7,7 +7,7 @@
 # The plotting functions of ForPaper/04_MethodComparison/Figures_p5_38/make_figures.py are used unchanged;
 # only its module globals (records, panel, method list, styles, output folder) are replaced, as the Rev15
 # wrapper does.  dae_elbow is resolved per (item, N) with the corrected selection (dae_z_selection_fixed.csv).
-# Error bars stay "mean +/- 95% CI over items" (R1-03: the legends must say so).
+# Error bars stay "mean +/- 95% CI over items" (the legends say so).
 # Output: ForPaper/Rev_Figs2to4_v2/Figures_{original,simplified}/  (gray and colour)
 # py3.14 (no TensorFlow).
 import os

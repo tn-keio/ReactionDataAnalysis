@@ -1,4 +1,4 @@
-# Stage 1d (Reviewer #2, Results-2): rolling recent-500 models evaluated on SUBSEQUENT,
+# Stage 1d: rolling recent-500 models evaluated on SUBSEQUENT,
 # NON-OVERLAPPING local curves, with anomalies injected into those same curves.
 #
 # Design (per 21-panel item, analyzers pooled as in the submitted Section 3.10):
@@ -10,7 +10,7 @@
 #   recall = on a battery generated from S itself (contemporaneous_synth.make_battery), types A/B/C/E
 #            at k in K_GRID (incl. sub-1-sigma levels) and D (lag 1-5); clean synthetic flag rate too.
 #   base-curve screening: both screen_frac=None (unscreened) and 0.9 (inlier-screened) are reported.
-#   normalization: scalar min-max from W, clip ON (submitted behaviour) and OFF (reviewer request).
+#   normalization: scalar min-max from W, clip ON (submitted behaviour) and OFF (revised manuscript).
 # Methods: E (empirical Mahalanobis, proposed), R (robust, iterative trimming), P (PCA 95%).
 #
 # Reuses (no modification): run_temporal_robustness_screened.py (mcd_like, maha, norm_fit),
