@@ -13,7 +13,7 @@ One CSV per analyte item (endpoint assays). Same column layout as the internal p
 | :--- | :--- | :--- |
 | `A_Name` | string | analyte / test item |
 | `SystemName` | string | analyzer unit (#1/#2/#3) |
-| `sample_id` | string | de-identified surrogate key (not the original barcode) |
+| `sample_id` | integer | dummy sequential surrogate key (1000000001, ...; not derived from the original barcode) |
 | `S_Date` | datetime | `YYYY-MM-DD HH:MM:SS` |
 | `Value` | float | reported result |
 | `RAS1`…`RAS38` | int | sub-wavelength absorbance, points 1–38 |

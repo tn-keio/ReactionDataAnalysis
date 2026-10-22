@@ -26,7 +26,10 @@ ReactionDataAnalysis/
 │   ├── export_processed_to_csv.py           # provenance: how the sample CSVs were produced
 │   ├── make_pointwise_variability_figure.py # model-free reaction-point-window figure (paper)
 │   ├── analysis_full/                       # the analysis code used for the paper (full dataset)
+│   │   └── revision/                        # analyses added or changed in the revised manuscript
 │   └── figures/                             # figure generators (Fig. 1–6, graphical abstract)
+├── ForPaper/                   # shared helpers imported by the revision analyses
+├── Code/src/                   # deep-learning baselines (TensorFlow)
 ├── Figures/                    # paper figures (tracked)
 │   └── pointwise_variability_{gray,color}.png
 ├── Results/                    # generated outputs (not tracked)
@@ -59,6 +62,11 @@ baselines (TensorFlow), which are omitted from the demo.
   Parquet layout they expect: `python Scripts/csv_to_parquet.py` (writes `Data/BigData/processed/`).
   This yields sample-scale results; scripts needing the full multi-year volume, the specific known
   anomaly, or the instrument logs still require the full dataset.
+- `Scripts/analysis_full/revision/` contains the analyses added or changed in the revised manuscript
+  (normalization without clipping, the extended synthetic battery and the 13-detector comparison, the
+  rolling evaluation on subsequent curves, the Cu cases, reagent-lot timing and fixed-reference
+  monitoring) and the generators of the revised figures. They import the modules in `analysis_full/`
+  and the helpers in `ForPaper/` unchanged; see `Scripts/analysis_full/revision/README.md`.
 - `Scripts/figures/` regenerates the manuscript figures from analysis outputs.
 - **`Scripts/SCRIPTS_MANIFEST.md` maps every script to its manuscript section, table, and figure.**
 - Environment: Python 3.12+ (tested on 3.14.2) with the pinned versions in `requirements.txt`;
@@ -115,9 +123,10 @@ processed store:
 
 ## Privacy
 
-`sample_id` is **not** the original sample barcode. Each raw barcode was replaced by a deterministic
-surrogate (SHA-256 prefix), consistent across items so that cross-item linkage is preserved while the
-barcode itself is removed. Quality-control materials and instrument-flagged (alarmed) samples were
+`sample_id` is **not** the original sample barcode. Each raw barcode was replaced by a dummy
+sequential number (1000000001, 1000000002, ...) assigned in the order the rows were exported. The same
+specimen has the same number in every item, so cross-item linkage is preserved; the barcode-to-number
+map was not stored, so the number carries no information about the barcode. Quality-control materials and instrument-flagged (alarmed) samples were
 excluded during preprocessing; 2026 data (after an analyzer change) were excluded. See
 `Scripts/export_processed_to_csv.py` for the exact procedure (set `ANONYMIZE_SID=False` only if ethics
 approval permits publishing raw IDs).

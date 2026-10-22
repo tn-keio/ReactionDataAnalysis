@@ -14,9 +14,7 @@
 # Prerequisites (run first, ONCE):
 #   1) py ExperimentalCode/Scripts/generate_endpoint_synthetic_anomalies_p5_38.py   (build 5-38 battery)
 #   2) the 1D-CNN decoder fix in Code/src/model_1d_cnn.py (length-aware; identical at 28 pts)
-# Deep-learning methods require the TF venv:  C:\Users\tnaka\PythonEnvs\2026_AbnormalDetect  (py3.12, TF2.20).
-#
-# *** CODE-REVIEW STAGE: created but NOT executed. ***
+# Deep-learning methods require a TensorFlow environment (Python 3.12, TensorFlow 2.20).
 
 import os
 import sys

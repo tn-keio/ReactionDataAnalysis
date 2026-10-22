@@ -10,17 +10,18 @@ Design choices (see Data/README in this repo):
               then sorted by S_Date. Full data (~13M rows) is too large for GitHub.
   * Points  : all 38 points are kept (RAS1..38, RAM1..38) for full reproducibility; the analysis
               window (points 5..38) is a downstream selection, not baked into the shared data.
-  * Privacy : the raw sample barcode S_ID is DE-IDENTIFIED to a surrogate key `sample_id`
-              (deterministic, consistent across items so cross-item linkage is preserved, but the
-              barcode itself is removed). Re-run with ANONYMIZE_SID=False only if your ethics
-              approval permits publishing raw sample IDs.
+  * Privacy : the raw sample barcode S_ID is replaced by a dummy sequential number `sample_id`
+              (1000000001, 1000000002, ... in the order rows are written; the same specimen gets the
+              same number in every item, so cross-item linkage is preserved). The barcode-to-number
+              map is held in memory only and never written, so the number carries no information
+              about the barcode. Re-run with ANONYMIZE_SID=False only if your ethics approval permits
+              publishing raw sample IDs.
 
 This script documents provenance; external users cannot run it (they do not have the processed
 store). It is shipped for transparency.
 """
 import os
 import glob
-import hashlib
 import pandas as pd
 import pyarrow.dataset as ds
 
@@ -35,6 +36,7 @@ OUT = os.path.join(REPO, 'Data')
 SAMPLE_N = 2000
 SEED = 42
 ANONYMIZE_SID = True
+FIRST_ID = 1000000001
 
 RAS = [f'RAS{i}' for i in range(1, 39)]
 RAM = [f'RAM{i}' for i in range(1, 39)]
@@ -58,10 +60,12 @@ def resolve_partitions():
     return mapping
 
 
+_SURROGATES = {}
+
+
 def surrogate(sid: str) -> str:
-    """Deterministic anonymized id for a raw sample barcode (stable across items)."""
-    h = hashlib.sha256(str(sid).encode('utf-8')).hexdigest()[:12]
-    return f'S{h}'
+    """Dummy sequential id for a raw sample barcode, in order of first appearance (stable across items)."""
+    return _SURROGATES.setdefault(str(sid).strip(), str(FIRST_ID + len(_SURROGATES)))
 
 
 def main():

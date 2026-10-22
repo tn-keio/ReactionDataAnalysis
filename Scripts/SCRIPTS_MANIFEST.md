@@ -3,7 +3,9 @@
 Mapping of every deposited script to the manuscript section, table or figure it
 supports. Analysis code lives in `analysis_full/`, figure generators in `figures/`,
 the deep-learning baselines in `../Code/src/`, and a runnable sample-data demo is
-`demo_mahalanobis.py`.
+`demo_mahalanobis.py`. The analyses added or changed in the revision, and the
+generators of the revised figures, are in `analysis_full/revision/` (see
+[Revision analyses](#revision-analyses) below and the README in that folder).
 
 The analysis covers **21 endpoint assays** and **13 anomaly detectors**;
 the proposed method is the **empirical-covariance Mahalanobis distance**.
@@ -106,14 +108,23 @@ reference sets. The correction was applied identically to all detectors.
 
 | Script | Manuscript |
 | :-- | :-- |
-| `analysis_full/run_temporal_robustness_all.py` | Rolling recent-500 scheme; month-to-month decision consistency (Cohen's κ) over 56 months across all 21 items → **Fig. 6a**; Suppl. S13. |
-| `analysis_full/run_temporal_robustness_demo.py` | Single-item (CRE) monthly subtle-recall time series → **Fig. 6b**. |
+| `analysis_full/run_temporal_robustness_all.py` | Rolling recent-500 scheme; month-to-month decision consistency (Cohen's κ) over 56 months across all 21 items → **Fig. 6a** of the submitted manuscript; Suppl. S13. |
+| `analysis_full/run_temporal_robustness_demo.py` | Single-item (CRE) monthly subtle-recall time series → **Fig. 6b** of the submitted manuscript. |
+| `analysis_full/contemporaneous_synth.py`, `run_temporal_robustness_screened.py` | Helpers imported by the revision analyses (anomalies injected into contemporaneous curves; the screened rolling scheme). |
+
+In the revised manuscript the κ analysis is removed, and Fig. 6 and Fig. S11 show
+each rolling model evaluated on the curves that followed it
+(`analysis_full/revision/s1d_rolling_contemporaneous.py`, `s1d3_fig6_figS11_rolling.py`).
 
 ## Real anomaly (Results §3.11; Suppl. S10)
 
 | Script | Manuscript |
 | :-- | :-- |
-| `analysis_full/real_anomaly_cu_validation.py` | The one cause-known real anomaly (Cu reagent / monoclonal protein, analyzer #3, 2023-01-20): 76-point fingerprint location, leakage-free training on the most recent 500 pre-event samples, 239× / 345× threshold, rank 1 of 416. Methods §2.9; **Fig. 5**. |
+| `analysis_full/real_anomaly_cu_validation.py` | Cu abnormal reaction (specimen containing a monoclonal protein, analyzer #3): 76-point fingerprint location, leakage-free training on the most recent 500 pre-event samples, 239× / 345× threshold, rank 1 of 416. Methods §2.9; **Fig. 5** of the submitted manuscript (now Suppl. S10.4, **Fig. S7**). The case identifier is not published: the script uses the placeholder 900000001 unless `CU_CASE_ID` is set. |
+
+The Cu case found during the revision (now §3.11 and **Fig. 5**) is analysed by
+`analysis_full/revision/s1r5_cu_case2_aligned.py` and drawn by `s1r7`/`s1r8`; Fig. S7
+is drawn by `s1r9`.
 
 ## Deployment and workload
 
@@ -146,10 +157,58 @@ reference sets. The correction was applied identically to all detectors.
 
 Figure generators consume the outputs of the analysis scripts (Parquet / `Results/`
 / figure panels); set `ABDETECT_BASE` accordingly or run after the analyses.
+The figures changed in the revision are drawn by the scripts in
+`analysis_full/revision/` (next section).
+
+## Revision analyses
+
+`analysis_full/revision/` holds the analyses added or changed in the revised
+manuscript. They import the modules above and the helpers in `../ForPaper/`
+unchanged and replace, at run time, only what the revision changes (for example the
+clipping in the normalization). They need the full dataset. Every script is listed
+with its purpose in `analysis_full/revision/README.md`; the main entries are:
+
+| Script | Manuscript |
+| :-- | :-- |
+| `revision/s1b_classical_rerun.py`, `s1e`–`s1j`, `s1u`–`s1y`, `s1z*` | Normalization without clipping, re-computed for the method comparison and the deployment-style analyses (Methods §2.5; values throughout). |
+| `revision/s2a_make_battery_v2.py`, `s2b_benchmark_v2.py` | Extended battery (sub-1σ, time warp, saturation) and the 13-detector comparison (Methods §2.6–§2.8; **Table 1**; Results §3.2–§3.5; Suppl. S5, S8.5). |
+| `revision/s2a2_bias_photometric.py`, `s2d*` | Effect of the anomalies on the reported result; recall at the clinical limit (Results §3.3; Suppl. S8.5–S8.6). |
+| `revision/s1z9a_samplelevel_flags_13.py`, `s1z9b_stats_13methods.py`, `s2f`, `s2g` | Statistics over the 13 detectors (Results §3.6; Suppl. S6). |
+| `revision/s1d_rolling_contemporaneous.py`, `s1d3`, `s1d2` | Rolling models evaluated on subsequent curves (Results §3.10; Suppl. S13; **Fig. 6**, Fig. S11). |
+| `revision/s1r5_cu_case2_aligned.py`, `s1r6`–`s1r9`, `s1r_extract_times.py` | The Cu cases (Results §3.11; Suppl. S10; **Fig. 5**, Fig. S7). |
+| `revision/s1o`, `s1q`, `s1s`, `s1s2` | Reagent-lot dates and exact onsets from the raw data (Results §3.8; Suppl. S9; Fig. S6). |
+| `revision/s1k`–`s1n`, `s1p`, `s1z11` | Fixed-reference monitoring and the reagent-degradation episodes (Results §3.12; Suppl. S14; Fig. S12). |
+| `revision/s1t_*` | Order of curves within a day (Suppl. S2.6). |
+| `revision/s3a`–`s3d` | Fig. 2–4, Fig. S9, Fig. S10 and the graphical abstract. |
+
+### Shared helpers — `../ForPaper/`
+
+Imported by the revision analyses at the paths they were run from. These are the
+versions used for the submitted manuscript; the revision scripts swap the
+normalization when they import them.
+
+| Module | Used for |
+| :-- | :-- |
+| `../ForPaper/_common/panel.py` | Assay panels, assay-name spellings and result locations shared by the revision scripts, including the precedence of the result sources behind Table 1. |
+| `../ForPaper/Suppl10_ReviewBurden/measure_review_burden_unified.py` | Rolling flag rates and workload (Table S3, S11.2), fixed-reference monitoring (S14). Same as `analysis_full/measure_review_burden_unified.py` except for the clipping and the path of the curve-count table. |
+| `../ForPaper/Suppl10_ReviewBurden/compare_methods_unified.py` | Per-method review budget under the deployment protocol. |
+| `../ForPaper/Suppl02_EstimatorSelection/make_estimator_selection_figure.py` | Fig. S2 (called by `revision/s1u2_figS2_noclip.py`). |
+| `../ForPaper/04_MethodComparison/Figures_p5_38/make_figures.py` | Plotting functions reused by `revision/s3a`, `s3d` and `s1d3`. |
 
 ---
 
 ## Changelog
+
+**2026-10-22** — Revision analyses; de-identification of the sample data.
+
+- Added `analysis_full/revision/` (70 scripts and a README) with the analyses of the
+  revised manuscript, the helpers they import (`../ForPaper/`), and
+  `analysis_full/contemporaneous_synth.py` and `run_temporal_robustness_screened.py`.
+- `Data/*.csv`: `sample_id` is now a dummy sequential number (1000000001, …); see the
+  repository README, Privacy.
+- `real_anomaly_cu_validation.py`: the case identifier is no longer in the code
+  (placeholder 900000001, or `CU_CASE_ID`); the case date is taken from the case row.
+- `run_method_comparison_p5_38.py`: removed a local environment path from a comment.
 
 **2026-10-17** — Statistics over the 13 detectors.
 

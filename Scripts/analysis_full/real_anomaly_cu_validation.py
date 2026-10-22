@@ -1,5 +1,5 @@
 # Real-anomaly validation: does the method flag the one KNOWN, adjudicated real anomaly?
-#   Cu reagent abnormal reaction, S_ID 1012001825031, analyzer #3, 2023-01-20 (SeqNo 20961; rejected paper).
+#   Cu abnormal reaction (specimen containing a monoclonal protein), analyzer #3.
 # Deployment-realistic: train Mahalanobis(E) on the recent 500 Cu samples BEFORE the anomaly date
 # (self-calibrated P99.5), on the confirmed window 5-38 (bubble points 1-4 excluded), and test whether the
 # held-out anomaly is flagged.  Two training variants: single-analyzer #3, and pooled #2+#3.  Window 1-38
@@ -19,8 +19,9 @@ PROC = os.path.join(BASE, 'Data', 'BigData', 'processed')
 OUT = os.path.join(BASE, 'Results', '20260718_RealAnomaly_Cu')
 FIGDIR = os.path.join(BASE, 'ForPaper', 'Suppl09_RealAnomalyValidation', 'Figures')
 RAS = [f'RAS{i}' for i in range(1, 39)]; RAM = [f'RAM{i}' for i in range(1, 39)]
-ANOM_SID = '1012001825031'      # S_ID is stored as a string in processed
-ANOM_DATE = pd.Timestamp('2023-01-20')
+# The specimen identifier of the internal dataset is not published. 900000001 is a placeholder;
+# set CU_CASE_ID to the identifier in your own copy of the processed data to run the analysis.
+ANOM_SID = os.environ.get('CU_CASE_ID', '900000001')      # S_ID is stored as a string in processed
 N_TRAIN = 500
 BUDGET = 99.5
 
@@ -99,14 +100,15 @@ def main():
     anom = df[df['S_ID'] == ANOM_SID]
     assert len(anom) == 1, f'expected 1 anomaly row, got {len(anom)}'
     anom_calc = calc38(anom)[0]
-    print(f'anomaly located: S_ID={ANOM_SID} sys={anom.iloc[0]["sys"]} date={anom.iloc[0]["d"].date()} '
+    print(f'anomaly located: sys={anom.iloc[0]["sys"]} '
           f'Value={anom.iloc[0]["Value"]}  Calc1={anom_calc[0]:.0f} Calc5={anom_calc[4]:.0f}', flush=True)
 
-    pre = df[df['d'] < ANOM_DATE]
+    anom_date = anom.iloc[0]['d'].normalize()      # sample date of the case: the training window ends before it
+    pre = df[df['d'] < anom_date]
     train_single = pre[pre['sys'] == '#3'].sort_values('d').iloc[-N_TRAIN:]
     train_pool = pre[pre['sys'].isin(['#2', '#3'])].sort_values('d').iloc[-N_TRAIN:]
     # contemporaneous test set: Cu #3 in [anomaly date, +70d], excluding the anomaly itself
-    test = df[(df['sys'] == '#3') & (df['d'] >= ANOM_DATE) & (df['d'] <= ANOM_DATE + pd.Timedelta(days=70))
+    test = df[(df['sys'] == '#3') & (df['d'] >= anom_date) & (df['d'] <= anom_date + pd.Timedelta(days=70))
               & (df['S_ID'] != ANOM_SID)]
     print(f'train_single(#3)={len(train_single)}  train_pool(#2+#3)={len(train_pool)}  test(#3 +70d)={len(test)}',
           flush=True)
@@ -122,7 +124,7 @@ def main():
                 models[label] = (m, tc)
 
     with open(os.path.join(OUT, 'detection_result.json'), 'w', encoding='utf-8') as f:
-        json.dump({'anomaly': {'S_ID': ANOM_SID, 'analyzer': '#3', 'date': str(ANOM_DATE.date()),
+        json.dump({'anomaly': {'analyzer': '#3',
                                'value': float(anom.iloc[0]['Value'])}, 'results': results}, f, indent=2)
 
     # ---- figA: anomaly curve vs training normal band ----
@@ -137,12 +139,12 @@ def main():
             sl = slice(lo - 1, hi)
             ax.fill_between(x[sl], (tr_mu - 2 * tr_sd)[sl], (tr_mu + 2 * tr_sd)[sl], color=c_band, alpha=0.6, label='normal ±2SD (train #3)')
             ax.plot(x[sl], tr_mu[sl], '0.5', ls='--', lw=0.8, label='normal mean')
-            ax.plot(x[sl], anom_calc[sl], color=c_anom, lw=1.8, marker='o', ms=3, label='anomaly (S_ID …5031)')
+            ax.plot(x[sl], anom_calc[sl], color=c_anom, lw=1.8, marker='o', ms=3, label='anomaly')
             ax.set_xlabel('photometric point'); ax.set_ylabel('Calc (RAM−RAS)'); ax.set_title(ttl, fontsize=9.5)
             ax.grid(alpha=0.3); ax.legend(fontsize=8)
         if gray:
             a1.axvspan(1, 4, color='0.9', zorder=0)
-        fig.suptitle('Cu real anomaly (2023-01-20, #3) vs training normal band', fontsize=11)
+        fig.suptitle('Cu real anomaly (analyzer #3) vs training normal band', fontsize=11)
         fig.tight_layout(rect=[0, 0, 1, 0.95]); save_fig(fig, 'figA_curve', gray)
 
     # ---- figB: training distance histogram + threshold + anomaly ----
