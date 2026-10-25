@@ -65,10 +65,15 @@ def apply_norm_unclipped(a, lo, hi):
     return (a - lo) / (hi - lo + 1e-8)
 
 
+def apply_norm_clipped(a, lo, hi):
+    """The clipped map of the submitted version, kept only for the --clip on reproduction arms."""
+    return np.clip((a - lo) / (hi - lo + 1e-8), 0.0, 1.0)
+
+
 def set_clip(clip):
     # load_item / clean_load_item look up apply_norm at call time (module global / M.apply_norm),
     # so replacing the module attribute is sufficient.
-    M.apply_norm = ORIG_APPLY_NORM if clip else apply_norm_unclipped
+    M.apply_norm = apply_norm_clipped if clip else apply_norm_unclipped
 
 
 def use_group(name, out_dir, cache_tag):

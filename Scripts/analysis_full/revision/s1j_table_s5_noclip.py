@@ -36,6 +36,11 @@ def apply_norm_noclip(a, lo, hi):
     return (a - lo) / (hi - lo + 1e-8)
 
 
+def apply_norm_clip(a, lo, hi):
+    """The clipped map of the submitted version, kept only for the --clip on check."""
+    return np.clip((a - lo) / (hi - lo + 1e-8), 0.0, 1.0)
+
+
 def load_lean(a_name):
     """Same (dates, calc) as C.load, built column by column.
 
@@ -115,8 +120,7 @@ def main():
         return merge(root)
     if a.lean:
         C.load = load_lean
-    if a.clip == 'off':
-        C.apply_norm = apply_norm_noclip
+    C.apply_norm = apply_norm_noclip if a.clip == 'off' else apply_norm_clip
     panel = [(proc, proc) for proc, _ in P.panel(a.panel)]       # this script keys the partition on A_Name
     C.PANEL = [x for x in panel if a.items is None or x[0] in a.items]
     if not C.PANEL:
