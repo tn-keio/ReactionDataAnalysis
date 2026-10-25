@@ -141,6 +141,9 @@ case"; the case of the submitted Fig. 5 is now S10.4 and Fig. S7.
 | `s1p_lot_reanalysis.py` | Re-analyses the clusters with per-measurement reagent lots from the raw data. |
 | `s1z11_igg_lot406.py` | IgG re-run with the reagent lot on analyzer #1 fixed to the lot named in Fig. S12, against the lot chosen from the data. |
 | `s1z14_tables_s14_5_6.py` | The tables in S14.5 and S14.6: per-analyzer curve and saline-blank alert weeks and the curve lead, under the two-consecutive-week rule, from the unclipped weekly series of `s1g` (arm rev13) and `s1z11`. |
+| `s1z15_figS12_noclip.py` | Fig. S12 redrawn from the unclipped series of `s1g` (arm rev13) and `s1z11`; uses `ForPaper/Rev16_FigureS12_ReagentEpisodes/make_figS12.py` and `s1z14`. |
+| `s1z16_figS8_noclip.py` | Fig. S8(a)–(e) (operating point and the transient optical event) redrawn from unclipped runs. |
+| `s1z17_figS3_S5a_noclip.py` | Fig. S3 (inter-analyzer transfer) and Fig. S5(a) (clean and benign flag rates) redrawn from unclipped results. |
 
 ### Order of curves within a day (S2.6)
 
