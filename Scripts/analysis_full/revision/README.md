@@ -77,6 +77,7 @@ Section numbers refer to the revised manuscript (§) and its supplement (S).
 | `s2d3_m2_spike_hit_recall.py` | Spike recall at the clinical limit over the curves whose reported value the spike changes. |
 | `s2d4_m2_affected_recall.py` | Recall at the clinical limit over the affected curves, for every anomaly type whose effect varies by curve. |
 | `s2d5_m2_supplement_tables.py` | Tables of S8.5–S8.6 from the result files (no new estimation). |
+| `s2d6_m2_eflm_refresh.py` | Re-runs `s2d2`, `s2d4` (on the saved flags) and `s2d5` with the EFLM estimates read on 2026-10-22, which give the values in S8.5–S8.6; compares them with the 2026-09-17 estimates. |
 | `s2i_plot_battery_examples.py` | Example plots of the added anomalies, for visual checking. |
 | `s2i2_plot_nonadditive_photometric.py` | Non-additive anomalies on a typical base curve (CRE, IgG) for Fig. S5. |
 | `s2h_2dcnn_ablation.py` | Ablation explaining the small change of the 2D-CNN → Isolation Forest recall between the submitted and v2 runs. |
@@ -103,6 +104,7 @@ Section numbers refer to the revised manuscript (§) and its supplement (S).
 | :-- | :-- |
 | `s1d_rolling_contemporaneous.py` | Each monthly rolling recent-500 model is scored on the next, non-overlapping curves and on anomalies injected into those same curves. |
 | `s1d3_fig6_figS11_rolling.py` | Fig. 6 and Fig. S11 from `s1d`. |
+| `s1d4_fig6_flagrate_panel.py` | Replaces panel (b) of the `s1d3` figure: per assay, the median and 95th-percentile month of the routine flag rate for the same three methods. |
 | `s1d2_cu_case_in_rolling.py` | Where the two abnormal curves of the Cu case fall in the rolling evaluation, and their ratio to the threshold (S13.6). |
 
 ### Cu cases (§3.11; S10; Fig. 5, Fig. S7)
@@ -138,6 +140,7 @@ case"; the case of the submitted Fig. 5 is now S10.4 and Fig. S7.
 | `s1n_cluster_classification.py` | Classifies the cluster episodes as known fault, reagent-lot change, calibration or unexplained, with a permutation control. |
 | `s1p_lot_reanalysis.py` | Re-analyses the clusters with per-measurement reagent lots from the raw data. |
 | `s1z11_igg_lot406.py` | IgG re-run with the reagent lot on analyzer #1 fixed to the lot named in Fig. S12, against the lot chosen from the data. |
+| `s1z14_tables_s14_5_6.py` | The tables in S14.5 and S14.6: per-analyzer curve and saline-blank alert weeks and the curve lead, under the two-consecutive-week rule, from the unclipped weekly series of `s1g` (arm rev13) and `s1z11`. |
 
 ### Order of curves within a day (S2.6)
 

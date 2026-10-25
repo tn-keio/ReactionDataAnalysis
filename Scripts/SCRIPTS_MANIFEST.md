@@ -174,10 +174,10 @@ with its purpose in `analysis_full/revision/README.md`; the main entries are:
 | `revision/s2a_make_battery_v2.py`, `s2b_benchmark_v2.py` | Extended battery (sub-1σ, time warp, saturation) and the 13-detector comparison (Methods §2.6–§2.8; **Table 1**; Results §3.2–§3.5; Suppl. S5, S8.5). |
 | `revision/s2a2_bias_photometric.py`, `s2d*` | Effect of the anomalies on the reported result; recall at the clinical limit (Results §3.3; Suppl. S8.5–S8.6). |
 | `revision/s1z9a_samplelevel_flags_13.py`, `s1z9b_stats_13methods.py`, `s2f`, `s2g` | Statistics over the 13 detectors (Results §3.6; Suppl. S6). |
-| `revision/s1d_rolling_contemporaneous.py`, `s1d3`, `s1d2` | Rolling models evaluated on subsequent curves (Results §3.10; Suppl. S13; **Fig. 6**, Fig. S11). |
+| `revision/s1d_rolling_contemporaneous.py`, `s1d3`, `s1d4`, `s1d2` | Rolling models evaluated on subsequent curves (Results §3.10; Suppl. S13; **Fig. 6**, Fig. S11). |
 | `revision/s1r5_cu_case2_aligned.py`, `s1r6`–`s1r9`, `s1r_extract_times.py` | The Cu cases (Results §3.11; Suppl. S10; **Fig. 5**, Fig. S7). |
 | `revision/s1o`, `s1q`, `s1s`, `s1s2` | Reagent-lot dates and exact onsets from the raw data (Results §3.8; Suppl. S9; Fig. S6). |
-| `revision/s1k`–`s1n`, `s1p`, `s1z11` | Fixed-reference monitoring and the reagent-degradation episodes (Results §3.12; Suppl. S14; Fig. S12). |
+| `revision/s1k`–`s1n`, `s1p`, `s1z11`, `s1z14` | Fixed-reference monitoring and the reagent-degradation episodes (Results §3.12; Suppl. S14; Fig. S12). |
 | `revision/s1t_*` | Order of curves within a day (Suppl. S2.6). |
 | `revision/s3a`–`s3d` | Fig. 2–4, Fig. S9, Fig. S10 and the graphical abstract. |
 
@@ -194,10 +194,27 @@ normalization when they import them.
 | `../ForPaper/Suppl10_ReviewBurden/compare_methods_unified.py` | Per-method review budget under the deployment protocol. |
 | `../ForPaper/Suppl02_EstimatorSelection/make_estimator_selection_figure.py` | Fig. S2 (called by `revision/s1u2_figS2_noclip.py`). |
 | `../ForPaper/04_MethodComparison/Figures_p5_38/make_figures.py` | Plotting functions reused by `revision/s3a`, `s3d` and `s1d3`. |
+| `../ForPaper/Rev13_PerAnalyzer_LotAligned/per_analyzer_lot.py` | Per-analyzer, lot-anchored weekly series of the fixed-reference flag rate and the saline blank (S14.5–S14.6, Fig. S12); run through `revision/s1g` (arm rev13) and `revision/s1z11`. |
 
 ---
 
 ## Changelog
+
+**2026-10-25** — Tables S14.5 and S14.6; two scripts and one data column that were missing.
+
+- Added `analysis_full/revision/s1z14_tables_s14_5_6.py`, which writes the two
+  per-analyzer timing tables of S14.5 and S14.6 with the two-consecutive-week alert
+  rule stated in the supplement.
+- Added `../ForPaper/Rev13_PerAnalyzer_LotAligned/per_analyzer_lot.py`, the module that
+  `revision/s1g` and `revision/s1z11` load. Its verdict file records the first week each
+  signal crosses its level, not the two-week rule.
+- Added `analysis_full/revision/s2d6_m2_eflm_refresh.py` (the clinical-limit tables of
+  S8.5–S8.6 with the EFLM estimates read on 2026-10-22) and
+  `analysis_full/revision/s1d4_fig6_flagrate_panel.py` (panel (b) of the rolling-evaluation
+  figure).
+- `Data/item_counts_ForPaper21.csv`: `in_method_comparison` set to Y for the eight assays
+  where it was blank (TG, LDL-C, HDL-C, TC, IgG, KL-6, IgA, IgM); all 21 assays are in the
+  method comparison.
 
 **2026-10-22** — Revision analyses; de-identification of the sample data.
 
