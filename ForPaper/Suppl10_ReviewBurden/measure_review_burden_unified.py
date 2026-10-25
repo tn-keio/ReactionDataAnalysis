@@ -64,7 +64,7 @@ def norm_fit(a):
 
 
 def apply_norm(a, lo, hi):
-    return np.clip((a - lo) / (hi - lo + 1e-8), 0.0, 1.0)
+    return (a - lo) / (hi - lo + 1e-8)      # affine, no clipping
 
 
 def maha(loc, cov, X):

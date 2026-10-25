@@ -26,7 +26,10 @@ import measure_review_burden_unified as B     # noqa: E402
 from _common import panel as P                # noqa: E402
 
 OUT = os.path.join(BASE, 'Results', '20261013_Rev_M1_BurdenMonthly')
-ORIG_APPLY_NORM = B.apply_norm
+
+def apply_norm_clip(a, lo, hi):
+    """The clipped map of the submitted version, kept here only for the --clip on repro check."""
+    return np.clip((a - lo) / (hi - lo + 1e-8), 0.0, 1.0)
 
 
 def apply_norm_noclip(a, lo, hi):
@@ -38,7 +41,7 @@ def main():
     ap.add_argument('--clip', choices=['on', 'off'], required=True)
     ap.add_argument('--items', default='', help='comma-separated subset (default: all 21 for off, IgM,IgA for on)')
     args = ap.parse_args()
-    B.apply_norm = ORIG_APPLY_NORM if args.clip == 'on' else apply_norm_noclip
+    B.apply_norm = apply_norm_clip if args.clip == 'on' else apply_norm_noclip
     items = [proc for proc, _ in P.PANEL21]
     if args.items:
         items = args.items.split(',')

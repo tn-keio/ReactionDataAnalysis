@@ -190,7 +190,7 @@ normalization when they import them.
 | Module | Used for |
 | :-- | :-- |
 | `../ForPaper/_common/panel.py` | Assay panels, assay-name spellings and result locations shared by the revision scripts, including the precedence of the result sources behind Table 1. |
-| `../ForPaper/Suppl10_ReviewBurden/measure_review_burden_unified.py` | Rolling flag rates and workload (Table S3, S11.2), fixed-reference monitoring (S14). Same as `analysis_full/measure_review_burden_unified.py` except for the clipping and the path of the curve-count table. |
+| `../ForPaper/Suppl10_ReviewBurden/measure_review_burden_unified.py` | Rolling flag rates and workload (Table S3, S11.2), fixed-reference monitoring (S14). Same as `analysis_full/measure_review_burden_unified.py` except for the path of the curve-count table. |
 | `../ForPaper/Suppl10_ReviewBurden/compare_methods_unified.py` | Per-method review budget under the deployment protocol. |
 | `../ForPaper/Suppl02_EstimatorSelection/make_estimator_selection_figure.py` | Fig. S2 (called by `revision/s1u2_figS2_noclip.py`). |
 | `../ForPaper/04_MethodComparison/Figures_p5_38/make_figures.py` | Plotting functions reused by `revision/s3a`, `s3d` and `s1d3`. |

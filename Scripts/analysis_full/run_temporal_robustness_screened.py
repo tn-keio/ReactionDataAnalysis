@@ -43,7 +43,7 @@ RAS = [f'RAS{i}' for i in range(11, 39)]
 
 
 def norm_fit(a): return float(a.min()), float(a.max())
-def apply_norm(a, lo, hi): return np.clip((a - lo) / (hi - lo + 1e-8), 0.0, 1.0)
+def apply_norm(a, lo, hi): return (a - lo) / (hi - lo + 1e-8)      # affine, no clipping
 
 
 def mcd_like(D, keep=0.95, iters=5):

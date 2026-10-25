@@ -4,7 +4,7 @@
 #   rev11 : fixed-reference IgG/IgM monthly + weekly onset (ForPaper/Rev11_FixedReference_IgEvent) -> Section 3.12
 #   rev13 : per-analyzer lot-aligned curve vs saline blank (ForPaper/Rev13_PerAnalyzer_LotAligned) -> S14.4-14.6
 #   rev14 : lot-stratified daily analysis (ForPaper/Rev14_LotStratified)
-# Nothing is modified: B.apply_norm (the only clip) is replaced, and _common.panel.out_dir (the only
+# Nothing is modified: B.apply_norm (formerly the only clip; now already affine) is replaced, and _common.panel.out_dir (the only
 # output-folder factory these scripts use; their INPUTS are read from fixed Results/20260726_* paths)
 # is redirected to Results/20260917_Rev_M1_S11S14_noclip/<name>, so submitted outputs are untouched.
 # py3.14 (no TensorFlow).
